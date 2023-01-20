@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Movies() {
+function Register() {
   return (
     <div>
-      <h>Movies</h>
+      Register
     </div>
   )
 };
 
-export default Movies;
+export default Register;

@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Movies() {
+function Profile() {
   return (
     <div>
-      <h>Movies</h>
+      Profile
     </div>
   )
 };
 
-export default Movies;
+export default Profile;
