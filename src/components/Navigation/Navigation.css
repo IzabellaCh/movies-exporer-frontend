@@ -1,0 +1,65 @@
+.navigation {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 30px;
+    align-items: center;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33
+}
+
+.navigation_type_logged {
+    /*расчет column-gap: 50% от 1280px - 1/2 от ширины "Фильмы Сохраненные фильмы" - padding - ширина кнопки "Аккаунт"*/
+    /*изменить на меньшие размеры*/
+    column-gap: calc(640px - 105px - 70px - 76px);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.4
+}
+
+.navigation__menu {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 16px;
+}
+
+.navigation__link {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.navigation__link_type_logged {
+    color: #000000;
+}
+
+.navigation__link_type_active {
+    font-weight: 500;
+}
+
+.navigation__button {
+    margin: 0;
+    padding: 0;
+    height: 32px;
+    width: 76px;
+    background-color: #2BE080;
+    border-radius: 3px;
+    color: #000000;
+    border-color: transparent;
+}
+
+.navigation__button_type_logged {
+    background-color: #F9F9F9;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 1.15;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.14
+}

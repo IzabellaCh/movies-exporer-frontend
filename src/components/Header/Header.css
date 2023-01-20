@@ -1,0 +1,30 @@
+.header {
+    min-height: 74px;
+    margin: 0;
+    padding: 18px 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.header_type_logged {
+    background-color: #ffffff;
+    /*расчет column-gap: 50% от 1280px - 1/2 от ширины "Фильмы Сохраненные фильмы" - padding - ширина логотипа*/
+    /*изменить на меньшие размеры*/
+    column-gap: calc(640px - 106px - 70px - 38px);
+}
+
+.header_type_unlogged {
+    background-color: #5C5C5C;
+}
+
+.header__logo {
+    margin: 0;
+    padding: 0;
+    height: 38px;
+    width: 38px;
+    object-fit: contain;
+    object-position: center;
+    opacity: 1;
+}

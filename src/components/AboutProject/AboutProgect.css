@@ -1,0 +1,27 @@
+.about-project {
+    margin: 0;
+    padding: 110px 70px;
+    min-height: 608px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.about-project__title {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.13;
+    letter-spacing: -0.04em;
+}
+
+.about-project__line {
+    margin: 23px 0 66px;
+    padding: 0;
+    width: calc(100vw - 140px);
+    height: 1px;
+    background-color: #000000;
+}
