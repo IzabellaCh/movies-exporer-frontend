@@ -6,13 +6,11 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    position: relative;
 }
 
 .header_type_logged {
     background-color: #ffffff;
-    /*расчет column-gap: 50% от 1280px - 1/2 от ширины "Фильмы Сохраненные фильмы" - padding - ширина логотипа*/
-    /*изменить на меньшие размеры*/
-    column-gap: calc(640px - 106px - 70px - 38px);
 }
 
 .header_type_unlogged {
@@ -27,4 +25,33 @@
     object-fit: contain;
     object-position: center;
     opacity: 1;
+}
+
+.header__button {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+}
+
+.header__button_type_logged {
+    width: 100px;
+    height: 32px;
+    background-color: #F9F9F9;
+    border-radius: 20px;
+    border-color: transparent;
+    font-size: 14px;
+    line-height: 1.15;
+    font-size: 14px;
+    line-height: 1.14;
+}
+
+.header__button_type_unlogged {
+    height: 32px;
+    width: 76px;
+    background-color: #2BE080;
+    border-radius: 3px;
+    color: #000000;
+    border-color: transparent;
+    font-size: 12px;
+    line-height: 1.33;
 }

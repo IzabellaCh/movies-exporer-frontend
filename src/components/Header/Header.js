@@ -11,8 +11,9 @@ function Header({ loggedIn }) {
 
   return (
     <header className={`header ${loggedIn? 'header_type_logged': 'header_type_unlogged'} `}>
-      <img onClick={toMain} className='header__logo button-link-opacity' src={logo} alt='Логотип.' />
+      <img onClick={toMain} className='header__logo button-opacity' src={logo} alt='Логотип.' />
       <Navigation loggedIn={loggedIn} />
+      <button className={`header__button ${loggedIn? 'header__button_type_logged' : 'header__button_type_unlogged'} button-opacity`}>{loggedIn? 'Аккаунт' : 'Войти'}</button>
     </header>
   )
 };

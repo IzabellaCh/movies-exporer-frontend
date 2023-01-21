@@ -15,12 +15,22 @@
   /* overflow: hidden; */
 }
 
-.button-link-opacity {
+.link-opacity {
   opacity: 1;
   transition: opacity 0.5s linear;
   cursor: pointer;
 }
 
-.button-link-opacity:hover {
+.link-opacity:hover {
+  opacity: 0.7;
+}
+
+.button-opacity {
+  opacity: 1;
+  transition: opacity 0.5s linear;
+  cursor: pointer;
+}
+
+.button-opacity:hover {
   opacity: 0.8;
 }

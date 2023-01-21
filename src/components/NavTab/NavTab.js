@@ -7,9 +7,9 @@ function NavTab() {
   return (
     <div className='nav-tab'>
       <nav className='nav-tab__menu'>
-        <NavLink to='' className='nav-tab__link button-link-opacity'>О проекте</NavLink>
-        <NavLink to='' className='nav-tab__link button-link-opacity'>Технологии</NavLink>
-        <NavLink to='' className='nav-tab__link button-link-opacity'>Студент</NavLink>
+        <NavLink to='' className='nav-tab__link link-opacity'>О проекте</NavLink>
+        <NavLink to='' className='nav-tab__link link-opacity'>Технологии</NavLink>
+        <NavLink to='' className='nav-tab__link link-opacity'>Студент</NavLink>
       </nav>
     </div>
   )
