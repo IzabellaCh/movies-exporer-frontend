@@ -10,7 +10,7 @@ import Register from '../Register/Register';
 
 
 function App() {
-  const loggedIn = true;
+  const loggedIn = false;
 
   return (
     <div className="page">
