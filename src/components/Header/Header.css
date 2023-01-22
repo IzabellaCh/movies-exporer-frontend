@@ -41,8 +41,8 @@
     border-color: transparent;
     font-size: 14px;
     line-height: 1.15;
-    font-size: 14px;
-    line-height: 1.14;
+    /* font-size: 14px;
+    line-height: 1.14; */
 }
 
 .header__button_type_unlogged {
@@ -54,4 +54,23 @@
     border-color: transparent;
     font-size: 12px;
     line-height: 1.33;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 18px 30px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .header {
+        padding: 18px 14px;
+    }
+
+    .header__button_type_unlogged {
+        width: 54px;
+        height: 26px;
+        font-size: 10px;
+        line-height: 1.6;
+    }
 }

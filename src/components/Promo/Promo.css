@@ -10,6 +10,7 @@
     background-image: url(../../images/promo.svg);
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 320px 320px;
 }
 
 .promo__title {
@@ -21,4 +22,26 @@
     line-height: 1.16;
     color: #ffffff;
     text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+    .promo {
+        min-height: 784px;
+        padding: 0 19px 0;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    .promo {
+        min-height: 570px;
+        background-size: 248px 248px;
+        padding: 0 10px 0;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .promo__title {
+        font-size: 31px;
+        line-height: 1.25;
+    }
 }

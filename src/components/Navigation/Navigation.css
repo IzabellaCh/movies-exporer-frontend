@@ -5,9 +5,6 @@
     justify-content: space-between;
     column-gap: 16px;
     align-items: center;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33
 }
 
 .navigation_type_logged {
@@ -19,6 +16,9 @@
 .navigation_type_unlogged {
     position: absolute;
     right: 176px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33
 }
 
 .navigation__link {
@@ -34,4 +34,18 @@
 
 .navigation__link_type_active {
     font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .navigation_type_unlogged {
+        right: 136px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .navigation_type_unlogged {
+        right: 82px;
+        font-size: 10px;
+        line-height: 1.6;
+    }
 }
