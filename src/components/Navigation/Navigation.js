@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 function Navigation({ loggedIn }) {
@@ -13,7 +13,7 @@ function Navigation({ loggedIn }) {
       )}
       {!loggedIn && (
         <>
-          <NavLink to='/singup' className='navigation__link link-opacity'>Регистрация</NavLink>
+          <Link to='/singup' className='navigation__link link-opacity'>Регистрация</Link>
         </>
       )}
     </div>

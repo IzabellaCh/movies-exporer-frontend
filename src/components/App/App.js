@@ -10,12 +10,11 @@ import Register from '../Register/Register';
 
 
 function App() {
-  const loggedIn = false;
 
   return (
     <div className="page">
       <Routes>
-        <Route exact path='/' element={<Main loggedIn={loggedIn} />} />
+        <Route exact path='/' element={<Main />} />
         <Route path='/movies' element={<Movies />} />
         <Route path='/saved' element={<SavedMovies />} />
         <Route path='/profile' element={<Profile />} />

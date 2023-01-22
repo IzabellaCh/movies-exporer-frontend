@@ -9,8 +9,10 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 
-function Main({ loggedIn }) {
-  return (
+function Main() {
+  const loggedIn = false;
+  
+    return (
     <div className='main'>
       <Header loggedIn={loggedIn} />
       <Promo />

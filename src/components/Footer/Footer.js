@@ -11,8 +11,8 @@ function Footer() {
         <p className='footer__copyright'>&copy; 2020</p>
         <nav>
           <ul className='footer__links'>
-            <li><Link to='' className='footer__link link-opacity'>Яндекс.Практикум</Link></li>
-            <li><Link to='' className='footer__link link-opacity'>Github</Link></li>
+            <li><Link to='' className='footer__link link-opacity' target='_blank'>Яндекс.Практикум</Link></li>
+            <li><Link to='' className='footer__link link-opacity' target='_blank'>Github</Link></li>
           </ul>
         </nav>
       </div>
