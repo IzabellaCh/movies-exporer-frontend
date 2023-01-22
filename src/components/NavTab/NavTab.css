@@ -26,3 +26,14 @@
     line-height: 1.23;
     color: #000000;
 }
+
+@media screen and (max-width: 540px) {
+    .nav-tab__link {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    .nav-tab__menu {
+        column-gap: 24px;
+    }
+}
