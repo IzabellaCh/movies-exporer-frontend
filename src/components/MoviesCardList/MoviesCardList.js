@@ -5,7 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 function MoviesCardList({ isSavedMovies, movies }) {
   
   return (
-    <div className='movies-card-list movies-card-list_type_saved-movies'>
+    <div className={`movies-card-list ${isSavedMovies? 'movies-card-list_type_saved-movies' : '' } `}>
       <div className='movies-card-list__elements'>
         {movies.map((item) => (
             <MoviesCard 

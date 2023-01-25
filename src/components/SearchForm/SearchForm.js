@@ -57,9 +57,14 @@ function SearchForm() {
             className={`search-form__button-search button-opacity`}></button>
             {/* ${isValid ? '': 'search-form__button-search_disabled'} */}
         </form>
-        <FilterCheckbox />
+        <div className='search-form__unated-checkbox'>
+          <FilterCheckbox />
+        </div>
       </div>
       <div className='search-form__line'></div>
+      <div className='search-form__separate-checkbox'>
+        <FilterCheckbox />
+      </div>
     </div>
   );
 }
