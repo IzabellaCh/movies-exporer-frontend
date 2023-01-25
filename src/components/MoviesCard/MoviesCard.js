@@ -16,7 +16,7 @@ function MoviesCard({ isSavedMovies, info }) {
         <p className='movie-card__name'>{info.nameRU}</p>
         <p className='movie-card__duration'>{info.duration} минут</p>
       </div>
-      <img src={info.image.formats.small.url} alt='Постер фильма.' className='movie-card__image'/>
+      <img src={isSavedMovies? info.image : info.image.formats.small.url} alt='Постер фильма.' className='movie-card__image'/>
       {!isSavedMovies && (
         <button onClick={saveMovie} className={`movie-card__button button-opacity ${isSaved? 'movie-card__button_type_is-saved' : 'movie-card__button_type_save'} `}>{isSaved? '' : 'Сохранить' }</button>
       )}

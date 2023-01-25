@@ -12,7 +12,7 @@ import tenth from '../images/posters/10.jpg';
 import eleventh from '../images/posters/11.jpg';
 import twelfth from '../images/posters/12.jpg';
 
-const movies = [
+const allMovies = [
   {
     _id: '1',
     nameRU: 'В погоне за Бенкси',
@@ -197,4 +197,4 @@ const savedMovies = [
   },
 ]
 
-export { movies, savedMovies};
+export { allMovies, savedMovies};

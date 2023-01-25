@@ -4,6 +4,8 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { allMovies } from '../../utils/constants';
+
 
 function Movies() {
   const loggedIn = true;
@@ -13,7 +15,7 @@ function Movies() {
     <div className='movies'>
       <Header loggedIn={loggedIn} />
       <SearchForm />
-      <MoviesCardList isSavedMovies={isSavedMovies} />
+      <MoviesCardList isSavedMovies={isSavedMovies} movies={allMovies} />
       <Footer />
     </div>
   )
