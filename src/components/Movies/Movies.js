@@ -7,12 +7,13 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies() {
   const loggedIn = true;
+  const isSavedMovies = false;
 
   return (
     <div className='movies'>
       <Header loggedIn={loggedIn} />
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList isSavedMovies={isSavedMovies} />
       <Footer />
     </div>
   )
