@@ -21,7 +21,6 @@
     width: calc(360px - 28px);
     display: flex;
     justify-content: space-between;
-    column-gap: 14px;
     align-items: center;
 }
 
@@ -49,6 +48,7 @@
     padding: 0;
     object-fit: cover;
     object-position: center;
+    overflow: hidden;
     max-height: 200px;
     max-width: 360px;
 }
@@ -85,4 +85,38 @@
 
 }
 
-@media screen and (max-width: 900px) {}
+@media screen and (max-width: 900px) {
+    .movie-card__info {
+        width: calc(342px - 28px);
+    }
+
+    .movie-card__image {
+        max-height: 190px;
+        max-width: 342px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .movie-card {
+        row-gap: 14px;
+    }
+
+    .movie-card__info {
+        width: calc(300px - 28px);
+    }
+
+    .movie-card__name {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .movie-card__duration {
+        font-size: 10px;
+        line-height: 1.8;
+    }
+
+    .movie-card__image {
+        max-height: 168px;
+        max-width: 300px;
+    }
+}
