@@ -4,11 +4,7 @@ import "./Navigation.css";
 
 function Navigation({ loggedIn }) {
   return (
-    <div
-      className={`navigation ${
-        loggedIn ? "navigation_type_logged" : "navigation_type_unlogged"
-      }`}
-    >
+    <div className={`navigation ${loggedIn ? "navigation_type_logged" : "navigation_type_unlogged"}`}>
       {loggedIn && (
         <>
           <NavLink
