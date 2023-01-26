@@ -59,11 +59,6 @@
         padding: 18px 30px;
     }
 
-    /*for time*/
-    .header__button-to-page_type_profile {
-        display: none;
-    }
-
     .header__button-menu {
         display: block;
     }
@@ -74,7 +69,7 @@
         padding: 18px 14px;
     }
 
-    .header__button-to-page_type_login {
+    .header__button-to-login {
         width: 54px;
         height: 26px;
         font-size: 10px;
