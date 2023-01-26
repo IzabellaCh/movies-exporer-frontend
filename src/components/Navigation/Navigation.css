@@ -78,7 +78,7 @@
 }
 
 .navigation__separate-menu {
-    display: none;
+    display: flex;
     margin: 0;
     padding: 0;
     position: fixed;
@@ -90,6 +90,9 @@
     justify-content: flex-end;
     align-items: flex-start;
     z-index: 1;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.5s, opacity 0.3s linear;
 }
 
 .navigation__links-container {
@@ -136,7 +139,9 @@
     }
 
     .navigation__separate-menu_type_open {
-        display: flex;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.5s linear;
     }
 
     .navigation_type_logged {
