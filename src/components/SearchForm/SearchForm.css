@@ -8,6 +8,7 @@
     align-items: center;
     row-gap: 69px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .search-form__line {
@@ -83,13 +84,9 @@
     border: none;
 }
 
-.search-form__inserted-checkbox {
+.search-form__checkbox {
     margin: 0;
     padding: 0;
-}
-
-.search-form__separate-checkbox {
-    display: none;
 }
 
 @media screen and (max-width: 900px) {
@@ -113,10 +110,6 @@
         row-gap: 46px;
     }
 
-    .search-form__inserted-checkbox {
-        display: none;
-    }
-
     .search-form__line {
         display: none;
     }
@@ -125,11 +118,13 @@
         display: none;
     }
 
-    .search-form__separate-checkbox {
-        display: block;
+    .search-form__checkbox {
         margin: 0;
         padding: 0;
         width: 100%;
+        position: absolute;
+        right: 0;
+        top: 196px;
     }
 
     .search-form__form {
