@@ -10,11 +10,11 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 
 function Main() {
-  const loggedIn = false;
+  const pageIsMain = true;
   
     return (
     <div className='main'>
-      <Header loggedIn={loggedIn} />
+      <Header pageIsMain={pageIsMain} />
       <Promo />
       <NavTab />
       <AboutProgect />

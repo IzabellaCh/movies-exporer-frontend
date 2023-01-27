@@ -8,12 +8,12 @@ import { allMovies } from '../../utils/constants';
 
 
 function Movies() {
-  const loggedIn = true;
+  const pageIsMain = false;
   const isSavedMovies = false;
 
   return (
     <div className='movies'>
-      <Header loggedIn={loggedIn} />
+      <Header pageIsMain={pageIsMain} />
       <SearchForm />
       <MoviesCardList isSavedMovies={isSavedMovies} movies={allMovies} />
       <Footer />

@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
 import { useNavigate } from 'react-router-dom';
 
-function Navigation({ loggedIn, menuIsOpen, closeMenu }) {
+function Navigation({ pageIsMain, menuIsOpen, closeMenu }) {
     const navigate = useNavigate();
   
   const toProfile = () => {
@@ -11,8 +11,8 @@ function Navigation({ loggedIn, menuIsOpen, closeMenu }) {
   }
 
   return (
-    <div className={`navigation ${loggedIn ? "navigation_type_logged" : "navigation_type_unlogged"}`}>
-      {loggedIn && (
+    <div className={`navigation ${!pageIsMain ? "navigation_type_logged" : "navigation_type_unlogged"}`}>
+      {!pageIsMain && (
         <>
           <div className='navigation__inserted-menu'>
             <nav className='navigation__links navigation__links_type_row'>
@@ -38,7 +38,7 @@ function Navigation({ loggedIn, menuIsOpen, closeMenu }) {
           </div>
         </>
       )}
-      {!loggedIn && (
+      {pageIsMain && (
         <nav>
           <Link to="/singup" className="navigation__link navigation__link_type_unlogged link-opacity">
             Регистрация
