@@ -66,10 +66,7 @@
 .search-form__input:focus {
     outline: none;
     border-bottom: solid 1px #A0A0A0;
-    margin-bottom: -5px;
 }
-
-/* .search-form__input-error {} */
 
 .search-form__button-search {
     margin: 0;
@@ -82,6 +79,10 @@
     background-size: 80px 34px;
     background-color: transparent;
     border: none;
+}
+
+.search-form__button-search_disabled {
+    opacity: 0.8;
 }
 
 .search-form__checkbox {

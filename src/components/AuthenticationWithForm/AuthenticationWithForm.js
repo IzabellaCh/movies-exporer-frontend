@@ -53,7 +53,7 @@ function AuthenticationWithForm({ info, handleSubmit }) {
   }, [isSubmitted]);
 
   return (
-    <div className="authentication" aria-label="Аутентификация">
+    <div className="authentication">
       <img
         onClick={toMain}
         className="authentication__logo button-opacity"
@@ -67,9 +67,9 @@ function AuthenticationWithForm({ info, handleSubmit }) {
             <span className="authentication__input-name">Имя</span>
             <input
               type="name"
+              name="name"
               value={values.name}
               onChange={onChange}
-              name="name"
               className={`authentication__input ${
                 errors.name?.length > 1
                   ? "authentication__input_type_error"

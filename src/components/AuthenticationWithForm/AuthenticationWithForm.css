@@ -64,7 +64,7 @@
 }
 
 .authentication__input_type_error {
-    color: #EE3465;
+    border-bottom-color: #EE3465;
 }
 
 .authentication__input-error {
@@ -98,6 +98,10 @@
     color: #FFFFFF;
     border-radius: 3px;
     border: none;
+}
+
+.authentication__save-button_disabled {
+    background-color: #E8E8E8;
 }
 
 .authentication__question {

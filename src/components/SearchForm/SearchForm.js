@@ -1,68 +1,86 @@
-import React, { useState } from 'react';
-import './SearchForm.css';
-import loupe from '../../images/loupe.svg';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { useRef } from 'react';
+import React, { useState, useEffect } from "react";
+import "./SearchForm.css";
+import loupe from "../../images/loupe.svg";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import { useRef } from "react";
 
 function SearchForm() {
   const inputMovie = useRef();
-  // const [values, setValues] = useState({});
-  // const [errors, setErrors] = useState({});
-  // const [isValid, setIsValid] = useState(false);
+  const [values, setValues] = useState({});
+  const [errors, setErrors] = useState({});
+  const [isValid, setIsValid] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const focusInput = () => {
     inputMovie.current.focus();
-  }
+  };
 
-  // const handleChange = (event) => {
-  //   const { name, value, validationMessage } = event.target;
-    
-  //   setValues((prev) => ({
-  //     ...prev,
-  //     [name]: value
-  //   }));
- 
-  //   setErrors((prev) => ({
-  //     ...prev,
-  //     [name]: validationMessage
-  //   }));
+  const onChange = (event) => {
+    const { name, value, validationMessage } = event.target;
 
-  //   if (event.target.closest('form').checkValidity()) {
-  //     setIsValid(true);
-  //   } else {
-  //     setIsValid(false);
-  //   };
-  // }
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: validationMessage,
+    }));
+
+    if (event.target.closest("form").checkValidity()) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      setValues(() => ({
+        movie: "",
+      }));
+      setIsValid(false);
+    }
+    return setIsSubmitted(false);
+  }, [isSubmitted]);
 
   return (
-    <div className='search-form'>
-      <div className='search-form__container'>
-        <img className='search-form__loupe link-opacity' onClick={focusInput} src={loupe} alt='Лупа.' />
-        <form className='search-form__form' noValidate>
-          <input 
-            className='search-form__input'
+    <section className="search-form" aria-label="Строка поиска">
+      <div className="search-form__container">
+        <img
+          className="search-form__loupe link-opacity"
+          onClick={focusInput}
+          src={loupe}
+          alt="Лупа."
+        />
+        <form className="search-form__form" noValidate>
+          <input
             ref={inputMovie}
-            type='text'
-            placeholder='Фильм'
-            // name='movie'
-            // id='movie-input'
-            // value={values.name}
-            // onChange={handleChange}
+            type="text"
+            name="movie"
+            value={values.movie}
+            onChange={onChange}
+            className="search-form__input"
+            placeholder="Фильм"
+            minLength="1"
+            maxLength="50"
             required
           ></input>
-          {/* <span className={`search-form__input-error movie-input-error ${(errors.name?.length > 1) ? 'popup__field-error_active' : ''}`}>{errors.name}</span> */}
-          <button 
-            type='submit'
-            // disabled={!isValid}
-            className={`search-form__button-search button-opacity`}></button>
-            {/* ${isValid ? '': 'search-form__button-search_disabled'} */}
+          <button
+            type="submit"
+            disabled={!isValid}
+            className={`search-form__button-search button-opacity ${
+              isValid ? "" : "search-form__button-search_disabled"
+            }`}
+          ></button>
         </form>
-        <div className='search-form__checkbox'>
+        <div className="search-form__checkbox">
           <FilterCheckbox />
         </div>
       </div>
-      <div className='search-form__line'></div>
-    </div>
+      <div className="search-form__line"></div>
+    </section>
   );
 }
 
