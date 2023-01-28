@@ -6,7 +6,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-
 }
 
 .authentication__logo {
@@ -100,7 +99,7 @@
     border: none;
 }
 
-.authentication__save-button_disabled {
+.authentication__save-button_type_disabled {
     background-color: #E8E8E8;
 }
 
@@ -117,4 +116,36 @@
 .authentication__link {
     color: #2BE080;
     text-decoration: none;
+}
+
+@media screen and (max-width: 425px) {
+    .authentication {
+        width: 260px;
+        height: calc(100% - 56px - 30px);
+        align-items: center;
+    }
+
+    .authentication__title {
+        margin: 0;
+        padding: 50px 0 80px;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .authentication__save-button {
+        margin: 143px 0 0;
+        font-size: 12px;
+        line-height: 1.25;
+    }
+
+    .authentication__save-button_type_login {
+        margin: 277px 0 0;
+    }
+
+    .authentication__question {
+        padding: 14px 0 0;
+        font-size: 12px;
+        line-height: 1.25;
+    }
 }

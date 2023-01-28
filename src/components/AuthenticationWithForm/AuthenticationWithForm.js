@@ -145,8 +145,8 @@ function AuthenticationWithForm({ info, handleSubmit }) {
           type="submit"
           disabled={!isValid}
           className={`authentication__save-button button-opacity ${
-            isValid ? "" : "authentication__save-button_disabled"
-          }`}
+            info.itIsRegister ? "" : "authentication__save-button_type_login"
+          } ${isValid ? "" : "authentication__save-button_type_disabled"}`}
         >
           {info.saveButton}
         </button>

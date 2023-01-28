@@ -1,8 +1,17 @@
 .login {
     margin: 0;
-    padding: 70px 0 70px;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 700px;
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 425px) {
+    .login {
+        padding: 56px 0 30px;
+        align-items: flex-start;
+        justify-content: center;
+    }
 }
