@@ -1,4 +1,5 @@
 import React from "react";
+import "./Login.css";
 import AuthenticationWithForm from "../AuthenticationWithForm/AuthenticationWithForm";
 
 function Login() {
@@ -14,7 +15,9 @@ function Login() {
   const handleSubmit = () => {};
 
   return (
-    <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
+    <section className="login" aria-label="Вход в систему">
+      <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
+    </section>
   );
 }
 
