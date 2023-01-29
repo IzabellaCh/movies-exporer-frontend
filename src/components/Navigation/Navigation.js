@@ -106,7 +106,7 @@ function Navigation({ pageIsMain, menuIsOpen, closeMenu }) {
       {pageIsMain && (
         <nav>
           <Link
-            to="/singup"
+            to="/signup"
             className="navigation__link navigation__link_type_unlogged link-opacity"
           >
             Регистрация

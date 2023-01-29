@@ -20,7 +20,7 @@ function App() {
         <Route path="/saved" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signin" element={<Login />} />
-        <Route path="/singup" element={<Register />} />
+        <Route path="/signup" element={<Register />} />
       </Routes>
       <Error isError={isError} />
     </div>

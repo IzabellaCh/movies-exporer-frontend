@@ -84,6 +84,10 @@
         min-height: 514px;
     }
 
+    .about-me__line {
+        margin: 25px 0 66px;
+    }
+
     .about-me__info {
         column-gap: 6%;
     }
@@ -109,6 +113,10 @@
     .about-me__avatar {
         width: 255px;
         height: 307px;
+    }
+
+    .about-me__github {
+        margin: 86px 0 0;
     }
 }
 
@@ -144,7 +152,7 @@
 
     .about-me__description {
         font-size: 11px;
-        line-height: 1.65;
+        line-height: 1.45;
     }
 
     .about-me__avatar {

@@ -92,9 +92,9 @@
 
 @media screen and (max-width: 900px) {
     .search-form {
-        padding: 80px 30px 10px;
-        min-height: 272px;
-        row-gap: 109px;
+        padding: 77px 30px 8px;
+        min-height: 267px;
+        row-gap: 100px;
     }
 
     .search-form__container {
@@ -108,11 +108,7 @@
 
 @media screen and (max-width: 650px) {
     .search-form {
-        row-gap: 46px;
-    }
-
-    .search-form__line {
-        display: none;
+        row-gap: 50px;
     }
 
     .search-form__loupe {
@@ -141,11 +137,15 @@
 
 @media screen and (max-width: 400px) {
     .search-form {
-        padding: 80px 10px 10px;
+        padding: 75px 10px 10px;
     }
 
     .search-form__input {
         font-size: 14px;
         line-height: 1.42;
+    }
+
+    .search-form__checkbox {
+        top: 192px;
     }
 }

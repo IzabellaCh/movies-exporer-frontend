@@ -6,12 +6,12 @@
 }
 
 .techs__line {
-    margin-bottom: 90px;
+    margin: 23px 0 0;
 }
 
 .techs__subtitle {
     margin: 0;
-    padding: 0;
+    padding: 90px 0 0;
     font-weight: 400;
     font-size: 50px;
     line-height: 1.16;
@@ -28,6 +28,7 @@
     align-self: center;
     text-align: center;
     letter-spacing: -0.04em;
+    max-width: 460px;
 }
 
 .techs__elements {
@@ -70,8 +71,8 @@
         min-height: 567px;
     }
 
-    .techs__line {
-        margin-bottom: 80px;
+    .techs__subtitle {
+        padding: 80px 0 0;
     }
 
     .techs__description {
@@ -100,7 +101,7 @@
 
 @media screen and (max-width: 600px) {
     .techs__line {
-        margin-bottom: 50px;
+        margin: 28px 0 0;
     }
 
     .techs__subtitle {
@@ -115,6 +116,7 @@
     }
 
     .techs__subtitle {
+        padding: 60px 0 0;
         font-size: 30px;
         line-height: 1.2;
     }

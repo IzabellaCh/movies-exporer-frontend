@@ -5,11 +5,11 @@
 
 .about-project__elements {
     margin: 0;
-    padding: 0;
+    padding: 70px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    column-gap: 40px;
+    column-gap: 50px;
 }
 
 .about-project__element {
@@ -57,6 +57,7 @@
 
 .about-project__time-element_type_one-week {
     flex-grow: 1;
+    max-width: 228px;
 }
 
 .about-project__time-element_type_four-week {
@@ -126,6 +127,7 @@
     }
 
     .about-project__elements {
+        padding: 60px 0 0;
         flex-direction: column;
         row-gap: 56px;
     }

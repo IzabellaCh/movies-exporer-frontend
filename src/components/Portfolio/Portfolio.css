@@ -1,5 +1,5 @@
 .portfolio {
-    padding: 100px 70px 125px;
+    padding: 100px 70px 105px;
     min-height: 525px;
 }
 
@@ -67,7 +67,7 @@
 
 @media screen and (max-width: 768px) {
     .portfolio {
-        padding: 90px 50px 90px;
+        padding: 90px 50px 70px;
         min-height: 480px;
     }
 
@@ -83,7 +83,7 @@
 
 @media screen and (max-width: 400px) {
     .portfolio {
-        padding: 70px 14px 70px;
+        padding: 72px 14px 70px;
         min-height: 381px;
     }
 

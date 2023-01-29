@@ -8,7 +8,7 @@ function Login() {
     title: "Рады видеть!",
     question: "Ещё не зарегистрированы?",
     link: "Регистрация",
-    path: "/singup",
+    path: "/signup",
     saveButton: "Войти",
   };
 
