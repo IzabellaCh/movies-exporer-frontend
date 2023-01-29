@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 function SearchForm() {
   const inputMovie = useRef();
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({ movie: "" });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);

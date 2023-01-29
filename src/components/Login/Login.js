@@ -12,11 +12,9 @@ function Login() {
     saveButton: "Войти",
   };
 
-  const handleSubmit = () => {};
+  // const handleSubmit = () => {};
 
-  return (
-    <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
-  );
+  return <AuthenticationWithForm info={loginInfo} />;
 }
 
 export default Login;

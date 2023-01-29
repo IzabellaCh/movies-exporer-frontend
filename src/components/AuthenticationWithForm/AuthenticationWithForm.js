@@ -4,8 +4,8 @@ import logo from "../../images/logo.svg";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function AuthenticationWithForm({ info, handleSubmit }) {
-  const [values, setValues] = useState({ email: "", password: "" });
+function AuthenticationWithForm({ info }) {
+  const [values, setValues] = useState({ name: "", email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -37,7 +37,7 @@ function AuthenticationWithForm({ info, handleSubmit }) {
   }
 
   function onSubmit(event) {
-    handleSubmit(event, values.email, values.password);
+    event.preventDefault();
     setIsSubmitted(true);
   }
 

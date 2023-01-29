@@ -12,11 +12,9 @@ function Register() {
     saveButton: "Зарегистрироваться",
   };
 
-  const handleSubmit = () => {};
+  // const handleSubmit = () => {};
 
-  return (
-    <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
-  );
+  return <AuthenticationWithForm info={loginInfo} />;
 }
 
 export default Register;
