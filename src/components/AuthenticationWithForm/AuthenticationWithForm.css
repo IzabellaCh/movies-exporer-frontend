@@ -1,5 +1,29 @@
 .authentication {
     margin: 0;
+    padding: 70px 0 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+    .authentication {
+        padding: 232px 0 232px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .authentication {
+        align-items: flex-start;
+        padding: 56px 0 30px;
+    }
+}
+
+.authentication__container {
+    margin: 0;
     padding: 0;
     width: 396px;
     display: flex;
@@ -120,7 +144,7 @@
 }
 
 @media screen and (max-width: 500px) {
-    .authentication {
+    .authentication__container {
         width: 260px;
         align-items: center;
     }

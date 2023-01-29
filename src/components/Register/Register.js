@@ -15,9 +15,7 @@ function Register() {
   const handleSubmit = () => {};
 
   return (
-    <section className="register" aria-label="Аутентификация">
-      <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
-    </section>
+    <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
   );
 }
 

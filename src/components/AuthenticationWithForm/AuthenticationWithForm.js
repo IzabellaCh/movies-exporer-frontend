@@ -53,111 +53,115 @@ function AuthenticationWithForm({ info, handleSubmit }) {
   }, [isSubmitted]);
 
   return (
-    <div className="authentication">
-      <img
-        onClick={toMain}
-        className="authentication__logo button-opacity"
-        src={logo}
-        alt="Логотип."
-      />
-      <h2 className="authentication__title">{info.title}</h2>
-      <form className="authentication__form" onSubmit={onSubmit} noValidate>
-        {info.itIsRegister && (
+    <section className="authentication" aria-label="Аутентификация">
+      <div className="authentication__container">
+        <img
+          onClick={toMain}
+          className="authentication__logo button-opacity"
+          src={logo}
+          alt="Логотип."
+        />
+        <h2 className="authentication__title">{info.title}</h2>
+        <form className="authentication__form" onSubmit={onSubmit} noValidate>
+          {info.itIsRegister && (
+            <label>
+              <span className="authentication__input-name">Имя</span>
+              <input
+                type="name"
+                name="name"
+                value={values.name}
+                onChange={onChange}
+                className={`authentication__input ${
+                  errors.name?.length > 1
+                    ? "authentication__input_type_error"
+                    : ""
+                }`}
+                // placeholder="Имя"
+                minLength="2"
+                maxLength="40"
+                required
+              />
+              <span
+                className={`authentication__input-error ${
+                  errors.name?.length > 1
+                    ? "authentication__input-error_active"
+                    : ""
+                }`}
+              >
+                {errors.name}
+              </span>
+            </label>
+          )}
           <label>
-            <span className="authentication__input-name">Имя</span>
+            <span className="authentication__input-name">Email</span>
             <input
-              type="name"
-              name="name"
-              value={values.name}
+              type="email"
+              value={values.email}
               onChange={onChange}
+              name="email"
               className={`authentication__input ${
-                errors.name?.length > 1
+                errors.email?.length > 1
                   ? "authentication__input_type_error"
                   : ""
               }`}
-              // placeholder="Имя"
-              minLength="2"
-              maxLength="40"
+              // placeholder="Email"
               required
             />
             <span
               className={`authentication__input-error ${
-                errors.name?.length > 1
+                errors.email?.length > 1
                   ? "authentication__input-error_active"
                   : ""
               }`}
             >
-              {errors.name}
+              {errors.email}
             </span>
           </label>
-        )}
-        <label>
-          <span className="authentication__input-name">Email</span>
-          <input
-            type="email"
-            value={values.email}
-            onChange={onChange}
-            name="email"
-            className={`authentication__input ${
-              errors.email?.length > 1 ? "authentication__input_type_error" : ""
-            }`}
-            // placeholder="Email"
-            required
-          />
-          <span
-            className={`authentication__input-error ${
-              errors.email?.length > 1
-                ? "authentication__input-error_active"
-                : ""
-            }`}
+          <label>
+            <span className="authentication__input-name">Пароль</span>
+            <input
+              type="password"
+              value={values.password}
+              onChange={onChange}
+              name="password"
+              className={`authentication__input ${
+                errors.password?.length > 1
+                  ? "authentication__input_type_error"
+                  : ""
+              }`}
+              // placeholder="Пароль"
+              minLength="4"
+              maxLength="16"
+              required
+            />
+            <span
+              className={`authentication__input-error ${
+                errors.password?.length > 1
+                  ? "authentication__input-error_active"
+                  : ""
+              } `}
+            >
+              {errors.password}
+            </span>
+          </label>
+          <button
+            type="submit"
+            disabled={!isValid}
+            className={`authentication__save-button button-opacity ${
+              info.itIsRegister ? "" : "authentication__save-button_type_login"
+            } ${isValid ? "" : "authentication__save-button_type_disabled"}`}
           >
-            {errors.email}
-          </span>
-        </label>
-        <label>
-          <span className="authentication__input-name">Пароль</span>
-          <input
-            type="password"
-            value={values.password}
-            onChange={onChange}
-            name="password"
-            className={`authentication__input ${
-              errors.password?.length > 1
-                ? "authentication__input_type_error"
-                : ""
-            }`}
-            // placeholder="Пароль"
-            minLength="4"
-            maxLength="16"
-            required
-          />
-          <span
-            className={`authentication__input-error ${
-              errors.password?.length > 1
-                ? "authentication__input-error_active"
-                : ""
-            } `}
-          >
-            {errors.password}
-          </span>
-        </label>
-        <button
-          type="submit"
-          disabled={!isValid}
-          className={`authentication__save-button button-opacity ${
-            info.itIsRegister ? "" : "authentication__save-button_type_login"
-          } ${isValid ? "" : "authentication__save-button_type_disabled"}`}
-        >
-          {info.saveButton}
-        </button>
-      </form>
-      <p className="authentication__question">
-        {`${info.question} `}
-        <Link to={info.path} className="authentication__link">
-          {info.link}
-        </Link>
-      </p>
-    </div>
+            {info.saveButton}
+          </button>
+        </form>
+        <p className="authentication__question">
+          {`${info.question} `}
+          <Link to={info.path} className="authentication__link">
+            {info.link}
+          </Link>
+        </p>
+      </div>
+    </section>
   );
 }
 

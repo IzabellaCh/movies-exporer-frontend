@@ -15,9 +15,7 @@ function Login() {
   const handleSubmit = () => {};
 
   return (
-    <section className="login" aria-label="Вход в систему">
-      <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
-    </section>
+    <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
   );
 }
 
