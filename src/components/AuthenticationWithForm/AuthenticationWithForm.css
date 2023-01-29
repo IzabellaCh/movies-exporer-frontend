@@ -1,7 +1,6 @@
 .authentication {
     margin: 0;
-    padding: 70px 0 70px;
-    height: calc(100% - 140px);
+    padding: 0;
     width: 396px;
     display: flex;
     flex-direction: column;
@@ -120,18 +119,9 @@
     text-decoration: none;
 }
 
-@media screen and (max-width: 768px) {
-    .authentication {
-        padding: 232px 0 232px;
-        height: calc(100% - 232px - 232px);
-    }
-}
-
 @media screen and (max-width: 500px) {
     .authentication {
-        padding: 56px 0 30px;
         width: 260px;
-        height: calc(100% - 56px - 30px);
         align-items: center;
     }
 
