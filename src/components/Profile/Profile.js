@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Profile() {
   const pageIsMain = false;
   return (
-    <div className="profile">
+    <section className="profile" aria-label="Аккаунт">
       <Header pageIsMain={pageIsMain} />
       <div className="progile__container">
         <h2 className="profile__title">Привет, Виталий!</h2>
@@ -29,7 +29,7 @@ function Profile() {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
