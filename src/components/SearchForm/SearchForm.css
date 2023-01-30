@@ -81,9 +81,10 @@
     border: none;
 }
 
+/* 
 .search-form__button-search_disabled {
     opacity: 0.8;
-}
+} */
 
 .search-form__checkbox {
     margin: 0;
