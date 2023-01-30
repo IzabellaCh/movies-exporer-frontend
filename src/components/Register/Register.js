@@ -14,7 +14,11 @@ function Register() {
 
   // const handleSubmit = () => {};
 
-  return <AuthenticationWithForm info={loginInfo} />;
+  return (
+    <main>
+      <AuthenticationWithForm info={loginInfo} />
+    </main>
+  );
 }
 
 export default Register;
