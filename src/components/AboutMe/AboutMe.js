@@ -1,7 +1,6 @@
 import React from "react";
 import "./AboutMe.css";
 import avatar from "../../images/avatar.jpg";
-import { Link } from "react-router-dom";
 
 function AboutMe() {
   return (
@@ -19,9 +18,14 @@ function AboutMe() {
             Контур». После того, как прошёл курс по веб-разработке, начал
             заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <Link className="about-me__github link-opacity" to="" target="_blank">
+          <a
+            className="about-me__github link-opacity"
+            href="https://github.com/IzabellaCh"
+            rel="noreferrer"
+            target="_blank"
+          >
             Github
-          </Link>
+          </a>
         </article>
         <img className="about-me__avatar" src={avatar} alt="Аватар."></img>
       </div>
