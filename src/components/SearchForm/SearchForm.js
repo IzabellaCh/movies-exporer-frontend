@@ -54,7 +54,7 @@ function SearchForm() {
           src={loupe}
           alt="Лупа."
         />
-        <form className="search-form__form" noValidate>
+        <form className="search-form__form">
           <input
             ref={inputMovie}
             type="text"

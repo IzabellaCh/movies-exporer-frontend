@@ -62,7 +62,7 @@ function AuthenticationWithForm({ info }) {
           alt="Логотип."
         />
         <h2 className="authentication__title">{info.title}</h2>
-        <form className="authentication__form" onSubmit={onSubmit} noValidate>
+        <form className="authentication__form" onSubmit={onSubmit}>
           {info.itIsRegister && (
             <label>
               <span className="authentication__input-name">Имя</span>
