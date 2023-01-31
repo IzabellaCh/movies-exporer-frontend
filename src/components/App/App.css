@@ -1,0 +1,34 @@
+.page {
+  max-width: 1600px;
+  min-width: 320px;
+  margin: 0 auto 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+.link-opacity {
+  opacity: 1;
+  transition: opacity 0.5s linear;
+  cursor: pointer;
+}
+
+.link-opacity:hover {
+  opacity: 0.7;
+}
+
+.button-opacity {
+  opacity: 1;
+  transition: opacity 0.5s linear;
+  cursor: pointer;
+}
+
+.button-opacity:hover {
+  opacity: 0.8;
+}
