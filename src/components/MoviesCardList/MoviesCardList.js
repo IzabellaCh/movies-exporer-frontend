@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({ isSavedMovies, movies }) {
-  useEffect(() => {}, [movies]);
-
   return (
     <section
-      className={`movies-card-list ${
-        isSavedMovies ? "movies-card-list_type_saved-movies" : ""
-      } `}
+      className={`${
+        movies.length > 0 ? "movies-card-list" : "movies-card-list_type_hidden"
+      } ${isSavedMovies ? "movies-card-list_type_saved-movies" : ""} `}
       aria-label="Список фильмов"
     >
       <div className="movies-card-list__elements">

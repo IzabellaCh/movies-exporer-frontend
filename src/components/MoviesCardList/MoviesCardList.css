@@ -9,6 +9,10 @@
     row-gap: 60px;
 }
 
+.movies-card-list_type_hidden {
+    display: none;
+}
+
 .movies-card-list_type_saved-movies {
     padding-bottom: 230px;
 }
