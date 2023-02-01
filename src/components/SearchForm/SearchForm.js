@@ -4,12 +4,12 @@ import loupe from "../../images/loupe.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useRef } from "react";
 
-function SearchForm() {
+function SearchForm({ onSubmit, isSubmitted, setIsSubmitted }) {
   const inputMovie = useRef();
   const [values, setValues] = useState({ movie: "" });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [isSubmitted, setIsSubmitted] = useState(false);
 
   const focusInput = () => {
     inputMovie.current.focus();
@@ -35,15 +35,15 @@ function SearchForm() {
     }
   };
 
-  useEffect(() => {
-    if (isSubmitted) {
-      setValues(() => ({
-        movie: "",
-      }));
-      setIsValid(false);
-    }
-    return setIsSubmitted(false);
-  }, [isSubmitted]);
+  // useEffect(() => {
+  //   if (isSubmitted) {
+  //     setValues(() => ({
+  //       movie: "",
+  //     }));
+  //     setIsValid(false);
+  //   }
+  //   return setIsSubmitted(false);
+  // }, [isSubmitted]);
 
   return (
     <section className="search-form" aria-label="Строка поиска">
@@ -54,7 +54,7 @@ function SearchForm() {
           src={loupe}
           alt="Лупа."
         />
-        <form className="search-form__form">
+        <form className="search-form__form" onSubmit={onSubmit}>
           <input
             ref={inputMovie}
             type="text"

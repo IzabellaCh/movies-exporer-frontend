@@ -12,11 +12,7 @@ function MoviesCardList({ isSavedMovies, movies }) {
     >
       <div className="movies-card-list__elements">
         {movies.map((item) => (
-          <MoviesCard
-            info={item}
-            key={item._id}
-            isSavedMovies={isSavedMovies}
-          />
+          <MoviesCard info={item} key={item.id} isSavedMovies={isSavedMovies} />
         ))}
       </div>
       {!isSavedMovies && (
