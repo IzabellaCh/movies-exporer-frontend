@@ -6,7 +6,7 @@ function MoviesCardList({ isSavedMovies, movies }) {
   return (
     <section
       className={`${
-        movies.length > 0 ? "movies-card-list" : "movies-card-list_type_hidden"
+        movies ? "movies-card-list" : "movies-card-list_type_hidden"
       } ${isSavedMovies ? "movies-card-list_type_saved-movies" : ""} `}
       aria-label="Список фильмов"
     >

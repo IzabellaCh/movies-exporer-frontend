@@ -4,12 +4,15 @@ import loupe from "../../images/loupe.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useRef } from "react";
 
-function SearchForm({ onSubmit, isSubmitted, setIsSubmitted }) {
+function SearchForm({ findNewMovies }) {
   const inputMovie = useRef();
   const [values, setValues] = useState({ movie: "" });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
-  // const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // вынесенные из movies
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [searchWord, setSearchWord] = useState("");
 
   const focusInput = () => {
     inputMovie.current.focus();
@@ -35,6 +38,23 @@ function SearchForm({ onSubmit, isSubmitted, setIsSubmitted }) {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // preloader
+    setSearchWord(values.movie);
+    // checkboxCondition
+    console.log(searchWord);
+
+    // теперь фильмы в переменной в компоненте movies/sevedMovies
+    findNewMovies(values.movie);
+
+    setIsSubmitted(true);
+  };
+
+  // useEffect(() => {
+  //   setSearchWord(values.movie);
+  // }, [values]);
+
   // useEffect(() => {
   //   if (isSubmitted) {
   //     setValues(() => ({
@@ -44,6 +64,7 @@ function SearchForm({ onSubmit, isSubmitted, setIsSubmitted }) {
   //   }
   //   return setIsSubmitted(false);
   // }, [isSubmitted]);
+  // console.log(searchWord.value);
 
   return (
     <section className="search-form" aria-label="Строка поиска">
@@ -54,7 +75,7 @@ function SearchForm({ onSubmit, isSubmitted, setIsSubmitted }) {
           src={loupe}
           alt="Лупа."
         />
-        <form className="search-form__form" onSubmit={onSubmit}>
+        <form className="search-form__form" onSubmit={handleSubmit}>
           <input
             ref={inputMovie}
             type="text"

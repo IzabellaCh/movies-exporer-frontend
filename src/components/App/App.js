@@ -8,25 +8,22 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Error from "../Error/Error";
-import { moviesApi } from "../../utils/MoviesApi.js";
+// import { moviesApi } from "../../utils/MoviesApi.js";
 
 import { getAllMovies } from "../../utils/MoviesApi.js";
 
 function App() {
   const [allMovies, setAllMovies] = useState([]);
-  const [searchFormIsSubmitted, setSearchFormIsSubmitted] = useState(false);
+  // const [searchFormIsSubmitted, setSearchFormIsSubmitted] = useState(false);
 
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorCode, setErrorCode] = useState("");
 
   const handleGetAllMovies = () => {
-    // moviesApi
-    //   .getMovies()
     getAllMovies()
       .then((data) => {
         setAllMovies(data);
-        // console.log(allMovies);
       })
       .catch((err) => {
         setErrorMessage(err.message);
@@ -43,7 +40,7 @@ function App() {
         <Route
           path="/movies"
           element={
-            <Movies movies={allMovies} onGetAllMovies={handleGetAllMovies} />
+            <Movies allMovies={allMovies} onGetAllMovies={handleGetAllMovies} />
           }
         />
         <Route path="/saved" element={<SavedMovies />} />
