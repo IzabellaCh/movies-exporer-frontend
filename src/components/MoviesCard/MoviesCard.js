@@ -11,7 +11,7 @@ function MoviesCard({ isSavedMovies, info }) {
 
   const deleteMovie = () => {};
 
-  const countMinutes = () => {
+  useEffect(() => {
     let n = Math.abs(info.duration) % 100;
     let n1 = info.duration % 10;
 
@@ -22,10 +22,6 @@ function MoviesCard({ isSavedMovies, info }) {
     } else if (n1 === 1) {
       setMinutes(" минута");
     } else setMinutes(" минут");
-  };
-
-  useEffect(() => {
-    countMinutes();
   }, [info]);
 
   return (

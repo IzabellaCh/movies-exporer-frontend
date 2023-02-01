@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({ isSavedMovies, movies }) {
+  useEffect(() => {}, [movies]);
+
   return (
     <section
       className={`movies-card-list ${
