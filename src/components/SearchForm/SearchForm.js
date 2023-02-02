@@ -4,14 +4,11 @@ import loupe from "../../images/loupe.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useRef } from "react";
 
-function SearchForm({ findNewMovies, setPreloaderIsVisible }) {
+function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
   const inputMovie = useRef();
   const [values, setValues] = useState({ movie: "" });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
-
-  // вынесенные из movies
-  // const [isSubmitted, setIsSubmitted] = useState(false);
 
   const focusInput = () => {
     inputMovie.current.focus();
@@ -45,8 +42,6 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible }) {
 
     // теперь фильмы в переменной в компоненте movies/sevedMovies
     findNewMovies(values.movie);
-
-    // setIsSubmitted(true);
   };
 
   // useEffect(() => {
@@ -95,7 +90,7 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible }) {
           ></button>
         </form>
         <div className="search-form__checkbox">
-          <FilterCheckbox />
+          <FilterCheckbox setIsShortFilm={setIsShortFilm} />
         </div>
       </div>
       <div className="search-form__line"></div>
