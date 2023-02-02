@@ -15,7 +15,6 @@ function Movies({ allMovies, getAllMovies }) {
   const [isShortFilm, setIsShortFilm] = useState(false);
 
   const filteredMovices = useMemo(() => {
-    // setPreloaderIsVisible(false);
     return filterMovies(
       allMovies,
       searchWord,

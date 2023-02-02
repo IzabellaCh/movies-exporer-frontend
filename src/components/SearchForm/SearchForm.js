@@ -10,10 +10,12 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
+  // фокус при нажатии на лупу
   const focusInput = () => {
     inputMovie.current.focus();
   };
 
+  // данные формы и валидация
   const onChange = (event) => {
     const { name, value, validationMessage } = event.target;
 
@@ -36,11 +38,16 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // preloader
+    if (values.movie.length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        movie: "Нужно ввести ключевое слово",
+      }));
+      return;
+    }
+    // запуск preloader
     setPreloaderIsVisible(true);
-    // checkboxCondition
-
-    // теперь фильмы в переменной в компоненте movies/sevedMovies
+    // вызов запроса фильмов + прокидывание слова для фильтра фильмов в компонент выше
     findNewMovies(values.movie);
   };
 
@@ -57,7 +64,6 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
   //   }
   //   return setIsSubmitted(false);
   // }, [isSubmitted]);
-  // console.log(searchWord.value);
 
   return (
     <section className="search-form" aria-label="Строка поиска">
@@ -68,22 +74,35 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
           src={loupe}
           alt="Лупа."
         />
-        <form className="search-form__form" onSubmit={handleSubmit}>
-          <input
-            ref={inputMovie}
-            type="text"
-            name="movie"
-            value={values.movie}
-            onChange={onChange}
-            className="search-form__input"
-            placeholder="Фильм"
-            minLength="1"
-            maxLength="50"
-            required
-          ></input>
+        <form className="search-form__form" onSubmit={handleSubmit} noValidate>
+          <label className="search-form__input-container">
+            <input
+              ref={inputMovie}
+              type="text"
+              name="movie"
+              value={values.movie}
+              onChange={onChange}
+              className={`search-form__input ${
+                errors.movie?.length > 1 ? "search-form__input_type_error" : ""
+              }`}
+              placeholder="Фильм"
+              minLength="1"
+              maxLength="50"
+              required
+            ></input>
+            <span
+              className={`search-form__input-error ${
+                errors.movie?.length > 1
+                  ? "search-form__input-error_active"
+                  : ""
+              }`}
+            >
+              {errors.movie}
+            </span>
+          </label>
           <button
             type="submit"
-            disabled={!isValid}
+            // disabled={!isValid}
             className={`search-form__button-search button-opacity ${
               isValid ? "" : "search-form__button-search_disabled"
             }`}

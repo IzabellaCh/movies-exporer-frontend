@@ -15,7 +15,7 @@ function AuthenticationWithForm({ info }) {
   const toMain = () => {
     navigate("/");
   };
-
+  // данные формы и валидация
   function onChange(event) {
     const { name, value, validationMessage } = event.target;
 
