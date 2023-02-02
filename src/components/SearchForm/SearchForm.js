@@ -51,20 +51,6 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
     findNewMovies(values.movie);
   };
 
-  // useEffect(() => {
-  //   setSearchWord(values.movie);
-  // }, [values]);
-
-  // useEffect(() => {
-  //   if (isSubmitted) {
-  //     setValues(() => ({
-  //       movie: "",
-  //     }));
-  //     setIsValid(false);
-  //   }
-  //   return setIsSubmitted(false);
-  // }, [isSubmitted]);
-
   return (
     <section className="search-form" aria-label="Строка поиска">
       <div className="search-form__container">
