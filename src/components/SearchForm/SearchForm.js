@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
 import loupe from "../../images/loupe.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
@@ -11,8 +11,7 @@ function SearchForm({ findNewMovies }) {
   const [isValid, setIsValid] = useState(false);
 
   // вынесенные из movies
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [searchWord, setSearchWord] = useState("");
+  // const [isSubmitted, setIsSubmitted] = useState(false);
 
   const focusInput = () => {
     inputMovie.current.focus();
@@ -41,14 +40,14 @@ function SearchForm({ findNewMovies }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // preloader
-    setSearchWord(values.movie);
+    // setSearchWord(values.movie);
     // checkboxCondition
-    console.log(searchWord);
+    // console.log("пробел", values.movie);
 
     // теперь фильмы в переменной в компоненте movies/sevedMovies
     findNewMovies(values.movie);
 
-    setIsSubmitted(true);
+    // setIsSubmitted(true);
   };
 
   // useEffect(() => {

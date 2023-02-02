@@ -1,40 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import "./Movies.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-// import { allMovies } from "../../utils/constants";
-import { findMovies } from "../../utils/findMovies";
+import { filterMoviesByWord } from "../../utils/filterMovies.js";
 
-function Movies({ allMovies, onGetAllMovies }) {
+function Movies({ allMovies, getAllMovies }) {
   const pageIsMain = false;
   const isSavedMovies = false;
-  // const [isSubmitted, setIsSubmitted] = useState(false);
-  // const [searchWord, setSearchWord] = useState("");
+  const [searchWord, setSearchWord] = useState("");
 
-  const [searchMovies, setSearchMovies] = useState([]);
+  const filteredMovices = useMemo(() => {
+    return filterMoviesByWord(allMovies, searchWord);
+  }, [allMovies, searchWord]);
 
-  const findNewMovies = (searchWord) => {
+  const findNewMovies = (word) => {
     if (allMovies.length < 1) {
-      onGetAllMovies();
+      getAllMovies();
     }
-    setSearchMovies(findMovies(allMovies, searchWord));
+    setSearchWord(word);
   };
 
-  // console.log(searchMovies);
   return (
     <>
       <Header pageIsMain={pageIsMain} />
       <main>
-        <SearchForm
-          findNewMovies={findNewMovies}
-          // isSubmitted={isSubmitted}
-          // setIsSubmitted={setIsSubmitted}
-          // searchWord={searchWord}
-          // setSearchWord={setSearchWord}
+        <SearchForm findNewMovies={findNewMovies} />
+        <MoviesCardList
+          isSavedMovies={isSavedMovies}
+          movies={filteredMovices}
         />
-        <MoviesCardList isSavedMovies={isSavedMovies} movies={searchMovies} />
       </main>
       <Footer />
     </>
