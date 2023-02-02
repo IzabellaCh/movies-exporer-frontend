@@ -4,7 +4,7 @@ import loupe from "../../images/loupe.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useRef } from "react";
 
-function SearchForm({ findNewMovies }) {
+function SearchForm({ findNewMovies, setPreloaderIsVisible }) {
   const inputMovie = useRef();
   const [values, setValues] = useState({ movie: "" });
   const [errors, setErrors] = useState({});
@@ -40,9 +40,8 @@ function SearchForm({ findNewMovies }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // preloader
-    // setSearchWord(values.movie);
+    setPreloaderIsVisible(true);
     // checkboxCondition
-    // console.log("пробел", values.movie);
 
     // теперь фильмы в переменной в компоненте movies/sevedMovies
     findNewMovies(values.movie);

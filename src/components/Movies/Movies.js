@@ -4,14 +4,17 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 import { filterMoviesByWord } from "../../utils/filterMovies.js";
 
 function Movies({ allMovies, getAllMovies }) {
   const pageIsMain = false;
   const isSavedMovies = false;
   const [searchWord, setSearchWord] = useState("");
+  const [preloaderIsVisible, setPreloaderIsVisible] = useState(false);
 
   const filteredMovices = useMemo(() => {
+    setPreloaderIsVisible(false);
     return filterMoviesByWord(allMovies, searchWord);
   }, [allMovies, searchWord]);
 
@@ -26,7 +29,11 @@ function Movies({ allMovies, getAllMovies }) {
     <>
       <Header pageIsMain={pageIsMain} />
       <main>
-        <SearchForm findNewMovies={findNewMovies} />
+        <SearchForm
+          findNewMovies={findNewMovies}
+          setPreloaderIsVisible={setPreloaderIsVisible}
+        />
+        <Preloader isVisible={preloaderIsVisible} />
         <MoviesCardList
           isSavedMovies={isSavedMovies}
           movies={filteredMovices}
