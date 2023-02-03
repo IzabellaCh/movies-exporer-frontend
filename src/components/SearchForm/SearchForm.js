@@ -46,9 +46,9 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
       return;
     }
     // запуск preloader
-    setPreloaderIsVisible(true);
+    // setPreloaderIsVisible(true);
     // вызов запроса фильмов + прокидывание слова для фильтра фильмов в компонент выше
-    findNewMovies(values.movie);
+    findNewMovies(values.movie, setErrors);
   };
 
   return (
@@ -74,7 +74,11 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
               placeholder="Фильм"
               minLength="1"
               maxLength="50"
-              required
+              // required - пока убрала,
+              // мне показалось так приятнее,
+              // раз по ТЗ необходимо сообщение на сабмит пустой формы
+              // иначе постоянно будет присуствовать сообщение об ошибке,
+              // если ползователь сам удалил написанное и оставил форму пустой
             ></input>
             <span
               className={`search-form__input-error ${
