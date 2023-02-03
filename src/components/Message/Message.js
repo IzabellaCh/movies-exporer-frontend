@@ -1,7 +1,7 @@
 import React from "react";
 import "./Message.css";
 
-function Message({ filteredMovices, searchWord }) {
+function Message({ filteredMovices, searchWord, preloaderIsVisible }) {
   return (
     <section
       className={`message ${

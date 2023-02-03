@@ -22,7 +22,9 @@ function App() {
         setAllMovies(data);
       })
       .catch((err) => {
-        setErrorMessage(err.message);
+        setErrorMessage(
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+        );
         setErrorCode(err.code);
         console.log(err.message, err.code);
         // setIsError(true);

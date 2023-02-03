@@ -41,9 +41,14 @@ function Movies({ allMovies, getAllMovies }) {
     if (allMovies.length < 1) {
       getAllMovies();
     }
+
     // сохранить искомое слово
     setSearchWord(word);
   };
+
+  // const showMessage = useMemo(() => {
+  //   return filteredMovices.length < 1 && searchWord.length !== 0;
+  // }, [filteredMovices, searchWord]);
 
   return (
     <>
@@ -55,7 +60,11 @@ function Movies({ allMovies, getAllMovies }) {
           setIsShortFilm={setIsShortFilm}
         />
         <Preloader isVisible={preloaderIsVisible} />
-        <Message filteredMovices={filteredMovices} searchWord={searchWord} />
+        <Message
+          filteredMovices={filteredMovices}
+          // searchWord={searchWord}
+          // preloaderIsVisible={preloaderIsVisible}
+        />
         <MoviesCardList
           isSavedMovies={isSavedMovies}
           movies={filteredMovices}
