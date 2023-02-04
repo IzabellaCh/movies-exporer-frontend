@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({ isSavedMovies, movies }) {
+function MoviesCardList({ isSavedMovies, movies, searchWord }) {
   // количество видимых фильмов на странице
   const [numberOfVisibleMovies, setNumberOfVisibleMovies] = useState(null);
 
@@ -23,7 +23,7 @@ function MoviesCardList({ isSavedMovies, movies }) {
     } else {
       setNumberOfVisibleMovies(5);
     }
-  }, []);
+  }, [searchWord]);
 
   // useEffect(() => {});
   console.log(movies.length, numberOfVisibleMovies);

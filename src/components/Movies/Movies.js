@@ -14,6 +14,7 @@ function Movies({ allMovies, getAllMovies }) {
   const [searchWord, setSearchWord] = useState("");
   const [preloaderIsVisible, setPreloaderIsVisible] = useState(false);
   const [isShortFilm, setIsShortFilm] = useState(false);
+  // const [] = useState();
 
   const filteredMovices = useMemo(() => {
     return filterMovies(allMovies, searchWord, isShortFilm);
@@ -56,6 +57,7 @@ function Movies({ allMovies, getAllMovies }) {
         <MoviesCardList
           isSavedMovies={isSavedMovies}
           movies={filteredMovices}
+          searchWord={searchWord}
         />
       </main>
       <Footer />
