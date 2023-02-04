@@ -21,6 +21,8 @@ function App() {
     getAllMovies()
       .then((data) => {
         setAllMovies(data);
+        localStorage.setItem("allMovies", JSON.stringify(data));
+        // console.log(localStorage.setItem("allMovies"));
       })
       .catch((err) => {
         setErrorMessage(
@@ -42,7 +44,11 @@ function App() {
         <Route
           path="/movies"
           element={
-            <Movies allMovies={allMovies} getAllMovies={handleGetAllMovies} />
+            <Movies
+              allMovies={allMovies}
+              getAllMovies={handleGetAllMovies}
+              setAllMovies={setAllMovies}
+            />
           }
         />
         <Route path="/saved" element={<SavedMovies />} />

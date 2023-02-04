@@ -17,7 +17,7 @@ function MoviesCardList({ isSavedMovies, movies, searchWord }) {
     }
   };
 
-  // добавление филмов при клике на ЕЩЁ
+  // добавление фильмов при клике на ЕЩЁ
   const addMovies = () => {
     if (window.innerWidth > 1272) {
       setNumberOfVisibleMovies(numberOfVisibleMovies + 3);

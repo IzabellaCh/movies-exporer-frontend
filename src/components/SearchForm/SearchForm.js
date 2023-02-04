@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 import loupe from "../../images/loupe.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useRef } from "react";
 
-function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
+function SearchForm({ findNewMovies, handleClickCheckbox, isShortFilm }) {
   const inputMovie = useRef();
   const [values, setValues] = useState({ movie: "" });
   const [errors, setErrors] = useState({});
@@ -45,11 +45,19 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
       }));
       return;
     }
-    // запуск preloader
-    // setPreloaderIsVisible(true);
     // вызов запроса фильмов + прокидывание слова для фильтра фильмов в компонент выше
     findNewMovies(values.movie, setErrors);
   };
+
+  useEffect(() => {
+    // проверка, есть ли в хранилице данные для фильтра фильмов
+    if (localStorage.getItem("searchWord") !== null) {
+      setValues((prev) => ({
+        ...prev,
+        movie: localStorage.getItem("searchWord"),
+      }));
+    }
+  }, []);
 
   return (
     <section className="search-form" aria-label="Строка поиска">
@@ -99,7 +107,10 @@ function SearchForm({ findNewMovies, setPreloaderIsVisible, setIsShortFilm }) {
           ></button>
         </form>
         <div className="search-form__checkbox">
-          <FilterCheckbox setIsShortFilm={setIsShortFilm} />
+          <FilterCheckbox
+            onChange={handleClickCheckbox}
+            checked={isShortFilm}
+          />
         </div>
       </div>
       <div className="search-form__line"></div>
