@@ -4,7 +4,12 @@ import loupe from "../../images/loupe.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useRef } from "react";
 
-function SearchForm({ findNewMovies, handleClickCheckbox, isShortFilm }) {
+function SearchForm({
+  findNewMovies,
+  handlePutWord,
+  handleClickCheckbox,
+  isShortFilm,
+}) {
   const inputMovie = useRef();
   const [values, setValues] = useState({ movie: "" });
   const [errors, setErrors] = useState({});
@@ -50,13 +55,7 @@ function SearchForm({ findNewMovies, handleClickCheckbox, isShortFilm }) {
   };
 
   useEffect(() => {
-    // проверка, есть ли в хранилице данные для фильтра фильмов
-    if (localStorage.getItem("searchWord") !== null) {
-      setValues((prev) => ({
-        ...prev,
-        movie: localStorage.getItem("searchWord"),
-      }));
-    }
+    handlePutWord(setValues);
   }, []);
 
   return (

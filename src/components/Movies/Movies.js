@@ -15,18 +15,7 @@ function Movies({ allMovies, getAllMovies, setAllMovies }) {
   const [preloaderIsVisible, setPreloaderIsVisible] = useState(false);
   const [isShortFilm, setIsShortFilm] = useState(false);
 
-  // для filterCheckbox
-  const handleClickCheckbox = (event) => {
-    if (event.target.checked) {
-      setIsShortFilm(true);
-      // localStorage.setItem("isShortFilm", "true");
-    } else {
-      setIsShortFilm(false);
-      // localStorage.setItem("isShortFilm", "false");
-    }
-  };
-
-  // функция фильтра фильмов
+  // фильтр фильмов
   const filteredMovices = useMemo(() => {
     return filterMovies(allMovies, searchWord, isShortFilm);
   }, [allMovies, searchWord, isShortFilm]);
@@ -52,15 +41,43 @@ function Movies({ allMovies, getAllMovies, setAllMovies }) {
   };
   // localStorage.clear();
 
+  // изменение состояния чекбокса
+  const handleClickCheckbox = (event) => {
+    if (event.target.checked) {
+      setIsShortFilm(true);
+      localStorage.setItem("isShortFilm", true);
+    } else {
+      setIsShortFilm(false);
+      localStorage.setItem("isShortFilm", false);
+    }
+  };
+
+  // подстановка текста в инпут из хранилища при перезагрузке
+  const putWordInInput = (setValues) => {
+    if (localStorage.getItem("searchWord") !== null) {
+      setValues((prev) => ({
+        ...prev,
+        movie: localStorage.getItem("searchWord"),
+      }));
+    }
+  };
+
   useEffect(() => {
     // проверка, есть ли в хранилице данные для фильтра фильмов
     // если есть - установка их в стейт при монтировании компонента (на случай перезагрузки страницы)
     if (localStorage.getItem("searchWord") !== null) {
       setSearchWord(localStorage.getItem("searchWord"));
     }
+
     if (localStorage.getItem("isShortFilm") !== null) {
-      setIsShortFilm(localStorage.getItem("isShortFilm"));
+      // setIsShortFilm(localStorage.getItem("isShortFilm"));
+      if (localStorage.getItem("isShortFilm") === "true") {
+        setIsShortFilm(true);
+      } else {
+        setIsShortFilm(false);
+      }
     }
+
     if (localStorage.getItem("allMovies") !== null) {
       setAllMovies(JSON.parse(localStorage.getItem("allMovies")));
     }
@@ -73,7 +90,7 @@ function Movies({ allMovies, getAllMovies, setAllMovies }) {
         <SearchForm
           findNewMovies={findNewMovies}
           handleClickCheckbox={handleClickCheckbox}
-          searchWord={searchWord}
+          handlePutWord={putWordInInput}
           isShortFilm={isShortFilm}
         />
         <Preloader isVisible={preloaderIsVisible} />

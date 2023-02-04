@@ -6,7 +6,7 @@ function FilterCheckbox({ onChange, checked }) {
     <form className="filter-checkbox">
       <label className="filter-checkbox__checkbox-container">
         <input
-          checked={Boolean(checked)}
+          checked={checked}
           type="checkbox"
           className="filter-checkbox__invisible-checkbox"
           onChange={onChange}
