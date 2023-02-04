@@ -4,7 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({ isSavedMovies, movies }) {
   // количество видимых фильмов на странице
-  const [numberOfVisibleMovies, setNumberOfVisibleMovies] = useState(0);
+  const [numberOfVisibleMovies, setNumberOfVisibleMovies] = useState(null);
 
   const addMovies = () => {
     if (window.innerWidth > 1272) {
@@ -25,7 +25,8 @@ function MoviesCardList({ isSavedMovies, movies }) {
     }
   }, []);
 
-  useEffect(() => {});
+  // useEffect(() => {});
+  console.log(movies.length, numberOfVisibleMovies);
 
   return (
     <section
@@ -54,7 +55,7 @@ function MoviesCardList({ isSavedMovies, movies }) {
             />
           ))}
       </div>
-      {!isSavedMovies && (
+      {!isSavedMovies && movies.length > numberOfVisibleMovies && (
         <button
           onClick={addMovies}
           className="movies-card-list__button-add-movies button-opacity"
