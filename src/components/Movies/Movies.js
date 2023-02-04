@@ -15,15 +15,8 @@ function Movies({ allMovies, getAllMovies }) {
   const [preloaderIsVisible, setPreloaderIsVisible] = useState(false);
   const [isShortFilm, setIsShortFilm] = useState(false);
 
-  // const [isSubmitted, setIsSubmitted] = useState(false);
-
   const filteredMovices = useMemo(() => {
-    return filterMovies(
-      allMovies,
-      searchWord,
-      isShortFilm,
-      setPreloaderIsVisible
-    );
+    return filterMovies(allMovies, searchWord, isShortFilm);
   }, [allMovies, searchWord, isShortFilm]);
 
   const findNewMovies = (word, setErrors) => {
@@ -35,20 +28,15 @@ function Movies({ allMovies, getAllMovies }) {
       }));
       return;
     }
-    // запустить прелоадер
-    setPreloaderIsVisible(true);
+
     // если запроса к стороннему api не было (нет сохраненного массива с фильмами) - провести
     if (allMovies.length < 1) {
-      getAllMovies();
+      getAllMovies(setPreloaderIsVisible);
     }
 
     // сохранить искомое слово
     setSearchWord(word);
   };
-
-  // const showMessage = useMemo(() => {
-  //   return filteredMovices.length < 1 && searchWord.length !== 0;
-  // }, [filteredMovices, searchWord]);
 
   return (
     <>
@@ -62,8 +50,8 @@ function Movies({ allMovies, getAllMovies }) {
         <Preloader isVisible={preloaderIsVisible} />
         <Message
           filteredMovices={filteredMovices}
-          // searchWord={searchWord}
-          // preloaderIsVisible={preloaderIsVisible}
+          searchWord={searchWord}
+          preloaderIsVisible={preloaderIsVisible}
         />
         <MoviesCardList
           isSavedMovies={isSavedMovies}

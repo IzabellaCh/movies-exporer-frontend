@@ -1,9 +1,4 @@
-export const filterMovies = (
-  movies,
-  searchWord,
-  isShortFilm,
-  turnOffPreloader
-) => {
+export const filterMovies = (movies, searchWord, isShortFilm) => {
   let filteredMovies;
   if (!isShortFilm) {
     filteredMovies = movies.filter((item) => {
@@ -19,6 +14,5 @@ export const filterMovies = (
       }
     });
   }
-  turnOffPreloader(false);
   return filteredMovies;
 };

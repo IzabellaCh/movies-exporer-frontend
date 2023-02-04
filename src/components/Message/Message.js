@@ -5,7 +5,9 @@ function Message({ filteredMovices, searchWord, preloaderIsVisible }) {
   return (
     <section
       className={`message ${
-        filteredMovices.length < 1 && searchWord.length !== 0
+        preloaderIsVisible
+          ? ""
+          : filteredMovices.length === 0 && searchWord.length !== 0
           ? "message_visible"
           : ""
       } `}

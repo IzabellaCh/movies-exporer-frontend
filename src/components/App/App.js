@@ -16,7 +16,8 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [errorCode, setErrorCode] = useState("");
 
-  const handleGetAllMovies = () => {
+  const handleGetAllMovies = (handlePreloader) => {
+    handlePreloader(true);
     getAllMovies()
       .then((data) => {
         setAllMovies(data);
@@ -28,6 +29,9 @@ function App() {
         setErrorCode(err.code);
         console.log(err.message, err.code);
         // setIsError(true);
+      })
+      .finally(() => {
+        handlePreloader(false);
       });
   };
 
