@@ -6,6 +6,18 @@ function MoviesCardList({ isSavedMovies, movies, searchWord }) {
   // количество видимых фильмов на странице
   const [numberOfVisibleMovies, setNumberOfVisibleMovies] = useState(null);
 
+  // расчет количества видимых фильмов на странице в зависимости от ширины окна
+  const checkWidth = () => {
+    if (window.innerWidth > 1272) {
+      setNumberOfVisibleMovies(12);
+    } else if (window.innerWidth > 631 && window.innerWidth < 1273) {
+      setNumberOfVisibleMovies(8);
+    } else {
+      setNumberOfVisibleMovies(5);
+    }
+  };
+
+  // добавление филмов при клике на ЕЩЁ
   const addMovies = () => {
     if (window.innerWidth > 1272) {
       setNumberOfVisibleMovies(numberOfVisibleMovies + 3);
@@ -15,18 +27,17 @@ function MoviesCardList({ isSavedMovies, movies, searchWord }) {
   };
 
   // расчет первоначального количества видимых фильмов на странице
+  // + обновление при изменении поиска
+  // + обновление при изменении ширины окна
   useEffect(() => {
-    if (window.innerWidth > 1272) {
-      setNumberOfVisibleMovies(12);
-    } else if (window.innerWidth > 631 && window.innerWidth < 1273) {
-      setNumberOfVisibleMovies(8);
-    } else {
-      setNumberOfVisibleMovies(5);
-    }
-  }, [searchWord]);
+    checkWidth();
 
-  // useEffect(() => {});
-  console.log(movies.length, numberOfVisibleMovies);
+    window.addEventListener("resize", checkWidth);
+
+    return () => {
+      window.removeEventListener("resize", checkWidth);
+    };
+  }, [searchWord]);
 
   return (
     <section

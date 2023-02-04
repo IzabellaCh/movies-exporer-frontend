@@ -14,12 +14,14 @@ function Movies({ allMovies, getAllMovies }) {
   const [searchWord, setSearchWord] = useState("");
   const [preloaderIsVisible, setPreloaderIsVisible] = useState(false);
   const [isShortFilm, setIsShortFilm] = useState(false);
-  // const [] = useState();
 
+  // функция фильтра фильмов
   const filteredMovices = useMemo(() => {
     return filterMovies(allMovies, searchWord, isShortFilm);
   }, [allMovies, searchWord, isShortFilm]);
 
+  // функция проверки и отправления запроса к массиву фильмов (там же preloader)
+  // + получение слова из формы поиска
   const findNewMovies = (word, setErrors) => {
     // не проводить повторный поиск, если слово совпадает с прошлым поиском
     if (word === searchWord) {
@@ -30,7 +32,7 @@ function Movies({ allMovies, getAllMovies }) {
       return;
     }
 
-    // если запроса к стороннему api не было (нет сохраненного массива с фильмами) - провести
+    // если запроса к стороннему api не было (нет сохраненного массива с фильмами) - провести + прелоадер в finally
     if (allMovies.length < 1) {
       getAllMovies(setPreloaderIsVisible);
     }
