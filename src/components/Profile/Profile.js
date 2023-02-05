@@ -3,11 +3,11 @@ import "./Profile.css";
 import Header from "../Header/Header";
 import { Link } from "react-router-dom";
 
-function Profile() {
+function Profile({ loggedIn }) {
   const pageIsMain = false;
   return (
     <>
-      <Header pageIsMain={pageIsMain} />
+      <Header pageIsMain={pageIsMain} loggedIn={loggedIn} />
       <main>
         <section className="progile">
           <h2 className="profile__title">Привет, Виталий!</h2>

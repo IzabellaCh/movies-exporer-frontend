@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
-// import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+// import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -14,6 +14,7 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import success from "../../images/success.svg";
 import fail from "../../images/fail.svg";
 import { authorization } from "../../utils/authorization";
+import { mainApi } from "../../utils/MainApi.js";
 
 function App() {
   const [allMovies, setAllMovies] = useState([]);
@@ -61,15 +62,15 @@ function App() {
     setIsFailOpen(false);
   };
 
-  function handleLogin() {
+  const handleLogin = () => {
     setLoggedIn(true);
-  }
+  };
 
-  function handleComeOut() {
+  const handleComeOut = () => {
     setLoggedIn(false);
-  }
+  };
 
-  function checkToken() {
+  const checkToken = useCallback(() => {
     authorization
       .checkToken()
       .then((res) => {
@@ -80,12 +81,28 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка при авторизации: ${err}`);
       });
-  }
+  });
+
+  useEffect(() => {
+    mainApi
+      .getUserInfo()
+      .then((data) => {
+        setCurrenUser(data);
+      })
+      .catch((err) => {
+        alert(`Ошибка при загрузке информации профиля: ${err}`);
+      });
+  }, [loggedIn]);
+
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   return (
     <div className="page">
+      {/* <CurrentUserContext.Provider value={currentUser}> */}
       <Routes>
-        <Route exact path="/" element={<Main />} />
+        <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
         <Route
           path="/movies"
           element={
@@ -93,11 +110,12 @@ function App() {
               allMovies={allMovies}
               getAllMovies={handleGetAllMovies}
               setAllMovies={setAllMovies}
+              loggedIn={loggedIn}
             />
           }
         />
-        <Route path="/saved" element={<SavedMovies />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/saved" element={<SavedMovies loggedIn={loggedIn} />} />
+        <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />
         <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
         <Route
           path="/signup"
@@ -124,6 +142,7 @@ function App() {
         isOpen={isFailOpen}
         onClose={closeAllPopups}
       />
+      {/* </CurrentUserContext.Provider> */}
     </div>
   );
 }

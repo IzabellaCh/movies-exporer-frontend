@@ -8,7 +8,7 @@ import Preloader from "../Preloader/Preloader";
 import Message from "../Message/Message";
 import { filterMovies } from "../../utils/filterMovies.js";
 
-function Movies({ allMovies, getAllMovies, setAllMovies }) {
+function Movies({ allMovies, getAllMovies, setAllMovies, loggedIn }) {
   const pageIsMain = false;
   const isSavedMovies = false;
   const [searchWord, setSearchWord] = useState("");
@@ -85,7 +85,7 @@ function Movies({ allMovies, getAllMovies, setAllMovies }) {
 
   return (
     <>
-      <Header pageIsMain={pageIsMain} />
+      <Header pageIsMain={pageIsMain} loggedIn={loggedIn} />
       <main>
         <SearchForm
           findNewMovies={findNewMovies}

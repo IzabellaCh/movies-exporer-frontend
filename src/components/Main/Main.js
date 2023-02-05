@@ -9,12 +9,12 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 
-function Main() {
+function Main({ loggedIn }) {
   const pageIsMain = true;
 
   return (
     <>
-      <Header pageIsMain={pageIsMain} />
+      <Header pageIsMain={pageIsMain} loggedIn={loggedIn} />
       <main className="main">
         <Promo />
         <NavTab />

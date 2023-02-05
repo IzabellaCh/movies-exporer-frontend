@@ -6,13 +6,13 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { savedMovies } from "../../utils/constants";
 
-function SavedMovies() {
+function SavedMovies({ loggedIn }) {
   const pageIsMain = false;
   const isSavedMovies = true;
 
   return (
     <>
-      <Header pageIsMain={pageIsMain} />
+      <Header pageIsMain={pageIsMain} loggedIn={loggedIn} />
       <main>
         <SearchForm />
         <MoviesCardList isSavedMovies={isSavedMovies} movies={savedMovies} />
