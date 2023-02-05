@@ -42,6 +42,14 @@ class Authorization {
       headers: this._headers,
     }).then(this._checkResponse);
   }
+
+  signout() {
+    return fetch(`${this._baseUrl}/signout`, {
+      method: "POST",
+      credentials: "include",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 }
 
 export const authorization = new Authorization({

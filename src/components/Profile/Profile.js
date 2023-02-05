@@ -3,8 +3,9 @@ import "./Profile.css";
 import Header from "../Header/Header";
 import { Link } from "react-router-dom";
 
-function Profile({ loggedIn }) {
+function Profile({ loggedIn, handleSignOut }) {
   const pageIsMain = false;
+
   return (
     <>
       <Header pageIsMain={pageIsMain} loggedIn={loggedIn} />
@@ -25,7 +26,11 @@ function Profile({ loggedIn }) {
             <Link className="profile__link" to="">
               Редактировать
             </Link>
-            <Link className="profile__link profile__link_type_red" to="">
+            <Link
+              onClick={handleSignOut}
+              className="profile__link profile__link_type_red"
+              to=""
+            >
               Выйти из аккаунта
             </Link>
           </div>

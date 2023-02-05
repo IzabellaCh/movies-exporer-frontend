@@ -82,6 +82,18 @@ function App() {
       });
   });
 
+  const handleSignOut = () => {
+    authorization
+      .signout()
+      .then((data) => {
+        console.log(data.message);
+        navigate("/signin");
+      })
+      .catch((err) => {
+        console.log(`Ошибка при выходе из аккаунта: ${err}`);
+      });
+  };
+
   useEffect(() => {
     mainApi
       .getUserInfo()
@@ -131,7 +143,7 @@ function App() {
             path="/profile"
             element={
               loggedIn ? (
-                <Profile loggedIn={loggedIn} />
+                <Profile loggedIn={loggedIn} handleSignOut={handleSignOut} />
               ) : (
                 <Navigate to="/signin" replace />
               )
