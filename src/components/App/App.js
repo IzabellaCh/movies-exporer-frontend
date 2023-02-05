@@ -19,7 +19,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [errorCode, setErrorCode] = useState("");
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
-  const [isFailOpen, setIsFailOpen] = useState(true);
+  const [isFailOpen, setIsFailOpen] = useState(false);
 
   const handleGetAllMovies = (handlePreloader) => {
     handlePreloader(true);
