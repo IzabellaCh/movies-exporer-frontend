@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./Register.css";
-import { Link, withRouter, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthenticationWithForm from "../AuthenticationWithForm/AuthenticationWithForm";
 import { authorization } from "../../utils/authorization";
 
-function Register() {
+function Register({ openSuccess, openFail }) {
   const navigate = useNavigate();
   const [buttonText, setButtonText] = useState("Зарегистрироваться");
 
@@ -24,12 +24,12 @@ function Register() {
       .then((res) => {
         console.log(res);
         if (res) {
-          // openSuccess();
+          openSuccess();
           navigate("/signin");
         }
       })
       .catch((err) => {
-        // openFail();
+        openFail();
         console.log(`Ошибка при регистрации: ${err}`);
       })
       .finally(() => {

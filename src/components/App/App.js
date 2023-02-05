@@ -9,12 +9,17 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Error from "../Error/Error";
 import { getAllMovies } from "../../utils/MoviesApi.js";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import success from "../../images/success.svg";
+import fail from "../../images/fail.svg";
 
 function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorCode, setErrorCode] = useState("");
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [isFailOpen, setIsFailOpen] = useState(true);
 
   const handleGetAllMovies = (handlePreloader) => {
     handlePreloader(true);
@@ -37,6 +42,19 @@ function App() {
       });
   };
 
+  const handleOpenSuccess = () => {
+    setIsSuccessOpen(true);
+  };
+
+  const handleOpenFail = () => {
+    setIsFailOpen(true);
+  };
+
+  const closeAllPopups = () => {
+    setIsSuccessOpen(false);
+    setIsFailOpen(false);
+  };
+
   return (
     <div className="page">
       <Routes>
@@ -54,9 +72,31 @@ function App() {
         <Route path="/saved" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
+        <Route
+          path="/signup"
+          element={
+            <Register
+              openSuccess={handleOpenSuccess}
+              openFail={handleOpenFail}
+            />
+          }
+        />
       </Routes>
       <Error isError={isError} code={errorCode} massage={errorMessage} />
+      <InfoTooltip
+        name="success"
+        title="Вы успешно зарегистрировались!"
+        image={success}
+        isOpen={isSuccessOpen}
+        onClose={closeAllPopups}
+      />
+      <InfoTooltip
+        name="fail"
+        title="Что-то пошло не так! Попробуйте ещё раз."
+        image={fail}
+        isOpen={isFailOpen}
+        onClose={closeAllPopups}
+      />
     </div>
   );
 }
