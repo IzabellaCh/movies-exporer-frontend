@@ -65,7 +65,7 @@
 }
 
 .profile__input:focus {
-    border-bottom-color: #2BE080;
+    font-size: 13px;
     font-weight: 500;
     outline: none;
 }
@@ -88,7 +88,8 @@
     opacity: 0;
     visibility: hidden;
     position: absolute;
-    top: 0;
+    text-align: end;
+    top: 30px;
     right: 0;
 }
 
@@ -112,6 +113,14 @@
 .profile__button_type_update {
     margin: 207px 0 0;
     align-self: center;
+    background-color: #2BE080;
+    border-radius: 3px;
+    height: 45px;
+    width: 100%;
+}
+
+.profile__button_type_disabled {
+    background-color: transparent;
 }
 
 .profile__button_type_red {

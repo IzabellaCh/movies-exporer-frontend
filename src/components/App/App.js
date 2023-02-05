@@ -78,23 +78,25 @@ function App() {
         navigate("/");
       })
       .catch((err) => {
-        console.log(`Ошибка при авторизации: ${err}`);
+        alert(`Ошибка при авторизации: ${err}`);
       });
   });
 
-  const handleUpdateUser = (newInfo, changeButton) => {
+  const handleUpdateUser = (name, email, changeButton) => {
     changeButton("Сохранение");
-    // api
-    //   .changeUserInfo(newInfo)
-    //   .then((data) => {
-    //     setCurrenUser(data);
-    //   })
-    //   .catch((err) => {
-    //     alert(`Ошибка при обновлнии данных: ${err}`);
-    //   })
-    //   .finally(() => {
-    //     changeButton("Редактировать");
-    //   });
+    mainApi
+      .changeUserInfo(name, email)
+      .then((data) => {
+        setCurrenUser(data);
+        handleOpenSuccess();
+      })
+      .catch((err) => {
+        handleOpenFail();
+        console.log(`Ошибка при обновлнии данных: ${err}`);
+      })
+      .finally(() => {
+        changeButton("Редактировать");
+      });
   };
 
   const handleSignOut = () => {
@@ -105,7 +107,7 @@ function App() {
         navigate("/");
       })
       .catch((err) => {
-        console.log(`Ошибка при выходе из аккаунта: ${err}`);
+        alert(`Ошибка при выходе из аккаунта: ${err}`);
       });
   };
 
@@ -182,7 +184,7 @@ function App() {
         <Error isError={isError} code={errorCode} massage={errorMessage} />
         <InfoTooltip
           name="success"
-          title="Вы успешно зарегистрировались!"
+          title="Всё получилось!"
           image={success}
           isOpen={isSuccessOpen}
           onClose={closeAllPopups}

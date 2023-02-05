@@ -11,7 +11,7 @@ class MainApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  // запрос для получения информации о пользователе
+  // запрос для получения информации о пользователе +
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       credentials: "include",
@@ -27,15 +27,15 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  //   запрос для изменения информации из формы
-  changeUserInfo(newInfo) {
+  //   запрос для изменения информации из формы +
+  changeUserInfo(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       credentials: "include",
       headers: this._headers,
       body: JSON.stringify({
-        name: newInfo.name,
-        about: newInfo.about,
+        name: name,
+        email: email,
       }),
     }).then(this._checkResponse);
   }

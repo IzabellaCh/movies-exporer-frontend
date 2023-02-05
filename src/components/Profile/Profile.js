@@ -12,8 +12,7 @@ function Profile({ loggedIn, handleSignOut, onUpdateUser }) {
     email: currentUser.email,
   });
   const [errors, setErrors] = useState({ name: "", email: "" });
-  const [isValid, setIsValid] = useState(true);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const onChange = (event) => {
     const { name, value, validationMessage } = event.target;
@@ -36,20 +35,17 @@ function Profile({ loggedIn, handleSignOut, onUpdateUser }) {
   };
 
   const onSubmit = (event) => {
-    onUpdateUser(event, values.name, values.password);
-    setIsSubmitted(true);
+    event.preventDefault();
+    onUpdateUser(values.name, values.email, setButtonText);
   };
 
   useEffect(() => {
-    if (isSubmitted) {
-      setValues(() => ({
-        name: currentUser.name,
-        email: currentUser.email,
-      }));
-      // setIsValid(true);
-    }
-    return setIsSubmitted(false);
-  }, [isSubmitted]);
+    setValues(() => ({
+      name: currentUser.name,
+      email: currentUser.email,
+    }));
+    setIsValid(false);
+  }, [currentUser]);
 
   return (
     <>
@@ -104,7 +100,18 @@ function Profile({ loggedIn, handleSignOut, onUpdateUser }) {
             </label>
             <button
               type="submit"
-              className="profile__button profile__button_type_update button-opacity"
+              disabled={
+                !isValid &&
+                (values.name === currentUser.name ||
+                  values.email === currentUser.email)
+              }
+              className={`profile__button profile__button_type_update button-opacity ${
+                isValid &&
+                (values.name !== currentUser.name ||
+                  values.email !== currentUser.email)
+                  ? ""
+                  : "profile__button_type_disabled"
+              }`}
             >
               {buttonText}
             </button>
@@ -115,27 +122,6 @@ function Profile({ loggedIn, handleSignOut, onUpdateUser }) {
           >
             Выйти из аккаунта
           </button>
-          {/* <ul className="profile__info">
-            <li className="profile__element">
-              <p className="profile__element-name">Имя</p>
-              <p className="profile__element-value">Виталий</p>
-            </li>
-            <li className="profile__element">
-              <p className="profile__element-name">E-mail</p>
-              <p className="profile__element-value">pochta@yandex.ru</p>
-            </li>
-          </ul> */}
-          {/* <div className="profile__buttons"> */}
-          {/* <button className="profile__button button-opacity">
-              Редактировать
-            </button> */}
-          {/* <button
-              onClick={handleSignOut}
-              className="profile__button button-opacity profile__button_type_red"
-            >
-              Выйти из аккаунта
-            </button> */}
-          {/* </div> */}
         </section>
       </main>
     </>

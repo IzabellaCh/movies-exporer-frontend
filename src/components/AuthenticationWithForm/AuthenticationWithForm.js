@@ -37,7 +37,6 @@ function AuthenticationWithForm({ info, buttonText, handleSubmit }) {
   };
 
   const onSubmit = (event) => {
-    // event.preventDefault();
     handleSubmit(event, values.email, values.password, values.name);
     setIsSubmitted(true);
   };
