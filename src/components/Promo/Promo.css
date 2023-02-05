@@ -43,6 +43,11 @@
         background-size: 248px 248px;
         padding: 0 10px 0;
     }
+
+    .promo__title {
+        padding: 227px 0 0;
+        font-size: 40px;
+    }
 }
 
 @media screen and (max-width: 550px) {
@@ -54,5 +59,6 @@
         padding: 207px 0 0;
         font-size: 31px;
         line-height: 1.25;
+        max-width: 386px;
     }
 }

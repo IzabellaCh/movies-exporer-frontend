@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
-// import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -100,49 +100,49 @@ function App() {
 
   return (
     <div className="page">
-      {/* <CurrentUserContext.Provider value={currentUser}> */}
-      <Routes>
-        <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
-        <Route
-          path="/movies"
-          element={
-            <Movies
-              allMovies={allMovies}
-              getAllMovies={handleGetAllMovies}
-              setAllMovies={setAllMovies}
-              loggedIn={loggedIn}
-            />
-          }
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
+          <Route
+            path="/movies"
+            element={
+              <Movies
+                allMovies={allMovies}
+                getAllMovies={handleGetAllMovies}
+                setAllMovies={setAllMovies}
+                loggedIn={loggedIn}
+              />
+            }
+          />
+          <Route path="/saved" element={<SavedMovies loggedIn={loggedIn} />} />
+          <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />
+          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+          <Route
+            path="/signup"
+            element={
+              <Register
+                openSuccess={handleOpenSuccess}
+                openFail={handleOpenFail}
+              />
+            }
+          />
+        </Routes>
+        <Error isError={isError} code={errorCode} massage={errorMessage} />
+        <InfoTooltip
+          name="success"
+          title="Вы успешно зарегистрировались!"
+          image={success}
+          isOpen={isSuccessOpen}
+          onClose={closeAllPopups}
         />
-        <Route path="/saved" element={<SavedMovies loggedIn={loggedIn} />} />
-        <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />
-        <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
-        <Route
-          path="/signup"
-          element={
-            <Register
-              openSuccess={handleOpenSuccess}
-              openFail={handleOpenFail}
-            />
-          }
+        <InfoTooltip
+          name="fail"
+          title="Что-то пошло не так! Попробуйте ещё раз."
+          image={fail}
+          isOpen={isFailOpen}
+          onClose={closeAllPopups}
         />
-      </Routes>
-      <Error isError={isError} code={errorCode} massage={errorMessage} />
-      <InfoTooltip
-        name="success"
-        title="Вы успешно зарегистрировались!"
-        image={success}
-        isOpen={isSuccessOpen}
-        onClose={closeAllPopups}
-      />
-      <InfoTooltip
-        name="fail"
-        title="Что-то пошло не так! Попробуйте ещё раз."
-        image={fail}
-        isOpen={isFailOpen}
-        onClose={closeAllPopups}
-      />
-      {/* </CurrentUserContext.Provider> */}
+      </CurrentUserContext.Provider>
     </div>
   );
 }
