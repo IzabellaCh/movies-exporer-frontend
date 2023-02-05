@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+// import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -12,6 +13,7 @@ import { getAllMovies } from "../../utils/MoviesApi.js";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import success from "../../images/success.svg";
 import fail from "../../images/fail.svg";
+import { authorization } from "../../utils/authorization";
 
 function App() {
   const [allMovies, setAllMovies] = useState([]);
@@ -20,6 +22,10 @@ function App() {
   const [errorCode, setErrorCode] = useState("");
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isFailOpen, setIsFailOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrenUser] = useState({});
+
+  const navigate = useNavigate();
 
   const handleGetAllMovies = (handlePreloader) => {
     handlePreloader(true);
@@ -55,6 +61,27 @@ function App() {
     setIsFailOpen(false);
   };
 
+  function handleLogin() {
+    setLoggedIn(true);
+  }
+
+  function handleComeOut() {
+    setLoggedIn(false);
+  }
+
+  function checkToken() {
+    authorization
+      .checkToken()
+      .then((res) => {
+        console.log(res);
+        handleLogin();
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(`Ошибка при авторизации: ${err}`);
+      });
+  }
+
   return (
     <div className="page">
       <Routes>
@@ -71,7 +98,7 @@ function App() {
         />
         <Route path="/saved" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/signin" element={<Login />} />
+        <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
         <Route
           path="/signup"
           element={

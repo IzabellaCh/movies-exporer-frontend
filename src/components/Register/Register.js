@@ -16,7 +16,7 @@ function Register({ openSuccess, openFail }) {
     path: "/signin",
   };
 
-  function handleSubmit(event, name, email, password) {
+  function handleSubmit(event, email, password, name) {
     event.preventDefault();
     setButtonText("Регистрация...");
     authorization
