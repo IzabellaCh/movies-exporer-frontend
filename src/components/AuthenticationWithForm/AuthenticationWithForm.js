@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function AuthenticationWithForm({ info, handleSubmit }) {
+function AuthenticationWithForm({ info, buttonText, handleSubmit }) {
   const [values, setValues] = useState({ name: "", email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -153,7 +153,7 @@ function AuthenticationWithForm({ info, handleSubmit }) {
               info.itIsRegister ? "" : "authentication__save-button_type_login"
             } ${isValid ? "" : "authentication__save-button_type_disabled"}`}
           >
-            {info.saveButton}
+            {buttonText}
           </button>
         </form>
         <p className="authentication__question">

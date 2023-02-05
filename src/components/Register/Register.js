@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import { Link, withRouter, useNavigate } from "react-router-dom";
 import AuthenticationWithForm from "../AuthenticationWithForm/AuthenticationWithForm";
@@ -6,6 +6,7 @@ import { authorization } from "../../utils/authorization";
 
 function Register() {
   const navigate = useNavigate();
+  const [buttonText, setButtonText] = useState("Зарегистрироваться");
 
   const loginInfo = {
     itIsRegister: true,
@@ -13,11 +14,11 @@ function Register() {
     question: "Уже зарегистрированы?",
     link: "Войти",
     path: "/signin",
-    saveButton: "Зарегистрироваться",
   };
 
   function handleSubmit(event, name, email, password) {
     event.preventDefault();
+    setButtonText("Регистрация...");
     authorization
       .register(name, email, password)
       .then((res) => {
@@ -25,21 +26,24 @@ function Register() {
         if (res) {
           // openSuccess();
           navigate("/signin");
-          // history.push("/signin");
         }
       })
       .catch((err) => {
         // openFail();
         console.log(`Ошибка при регистрации: ${err}`);
+      })
+      .finally(() => {
+        setButtonText("Зарегистрироваться");
       });
-    // .finally(() => {
-    //   setSaveButton('Зарегистрироваться');
-    // })
   }
 
   return (
     <main>
-      <AuthenticationWithForm info={loginInfo} handleSubmit={handleSubmit} />
+      <AuthenticationWithForm
+        info={loginInfo}
+        buttonText={buttonText}
+        handleSubmit={handleSubmit}
+      />
     </main>
   );
 }
