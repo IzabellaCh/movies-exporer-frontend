@@ -16,7 +16,7 @@ function AuthenticationWithForm({ info, buttonText, handleSubmit }) {
     navigate("/");
   };
   // данные формы и валидация
-  function onChange(event) {
+  const onChange = (event) => {
     const { name, value, validationMessage } = event.target;
 
     setValues((prev) => ({
@@ -34,13 +34,13 @@ function AuthenticationWithForm({ info, buttonText, handleSubmit }) {
     } else {
       setIsValid(false);
     }
-  }
+  };
 
-  function onSubmit(event) {
+  const onSubmit = (event) => {
     // event.preventDefault();
     handleSubmit(event, values.email, values.password, values.name);
     setIsSubmitted(true);
-  }
+  };
 
   useEffect(() => {
     if (isSubmitted) {

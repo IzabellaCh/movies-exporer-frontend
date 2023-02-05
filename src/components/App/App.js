@@ -82,12 +82,27 @@ function App() {
       });
   });
 
+  const handleUpdateUser = (newInfo, changeButton) => {
+    changeButton("Сохранение");
+    // api
+    //   .changeUserInfo(newInfo)
+    //   .then((data) => {
+    //     setCurrenUser(data);
+    //   })
+    //   .catch((err) => {
+    //     alert(`Ошибка при обновлнии данных: ${err}`);
+    //   })
+    //   .finally(() => {
+    //     changeButton("Редактировать");
+    //   });
+  };
+
   const handleSignOut = () => {
     authorization
       .signout()
       .then((data) => {
         console.log(data.message);
-        navigate("/signin");
+        navigate("/");
       })
       .catch((err) => {
         console.log(`Ошибка при выходе из аккаунта: ${err}`);
@@ -143,7 +158,11 @@ function App() {
             path="/profile"
             element={
               loggedIn ? (
-                <Profile loggedIn={loggedIn} handleSignOut={handleSignOut} />
+                <Profile
+                  loggedIn={loggedIn}
+                  handleSignOut={handleSignOut}
+                  onUpdateUser={handleUpdateUser}
+                />
               ) : (
                 <Navigate to="/signin" replace />
               )
