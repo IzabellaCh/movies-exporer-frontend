@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -34,7 +34,6 @@ function App() {
       .then((data) => {
         setAllMovies(data);
         localStorage.setItem("allMovies", JSON.stringify(data));
-        // console.log(localStorage.setItem("allMovies"));
       })
       .catch((err) => {
         setErrorMessage(
@@ -106,16 +105,38 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies
-                allMovies={allMovies}
-                getAllMovies={handleGetAllMovies}
-                setAllMovies={setAllMovies}
-                loggedIn={loggedIn}
-              />
+              loggedIn ? (
+                <Movies
+                  allMovies={allMovies}
+                  getAllMovies={handleGetAllMovies}
+                  setAllMovies={setAllMovies}
+                  loggedIn={loggedIn}
+                />
+              ) : (
+                <Navigate to="/signin" replace />
+              )
             }
           />
-          <Route path="/saved" element={<SavedMovies loggedIn={loggedIn} />} />
-          <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />
+          <Route
+            path="/saved"
+            element={
+              loggedIn ? (
+                <SavedMovies loggedIn={loggedIn} />
+              ) : (
+                <Navigate to="/signin" replace />
+              )
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              loggedIn ? (
+                <Profile loggedIn={loggedIn} />
+              ) : (
+                <Navigate to="/signin" replace />
+              )
+            }
+          />
           <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
           <Route
             path="/signup"
