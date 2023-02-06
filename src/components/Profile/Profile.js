@@ -52,7 +52,7 @@ function Profile({ loggedIn, handleSignOut, onUpdateUser }) {
       <Header pageIsMain={pageIsMain} loggedIn={loggedIn} />
       <main>
         <section className="profile">
-          <h2 className="profile__title">Привет, Виталий!</h2>
+          <h2 className="profile__title">Привет, {currentUser.name}!</h2>
           <form className="profile__info" onSubmit={onSubmit}>
             <label className="profile__element">
               <span className="profile__input-name">Имя</span>
