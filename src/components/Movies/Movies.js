@@ -23,9 +23,8 @@ function Movies({
   const [preloaderIsVisible, setPreloaderIsVisible] = useState(false);
   const [isShortFilm, setIsShortFilm] = useState(false);
 
-  // БЛОК О КАРТОЧКЕ
-  // const [isSaved, setIsSaved] = useState(false);
-
+  // БЛОК О КАРТОЧКЕ С ФИЛЬМОМ
+  // поиск фильма в массиве с сохраненными фильмами, чтобы по id была возможность удалить
   const findMovieInfo = useCallback(
     (movieInfo, isSaved) => {
       if (isSaved) {
@@ -37,6 +36,7 @@ function Movies({
     [savedMovies]
   );
 
+  // сохранение или удаления фильма по клику
   const handleSaveOrDeleteMovie = (event, isSaved, movieInfo, setIsSaved) => {
     event.preventDefault();
     if (!isSaved) {
@@ -47,6 +47,7 @@ function Movies({
     }
   };
 
+  // проверка, есть ли фильм среди сохрненный (для правильной отрисовке при рендере)
   const checkIsSaved = useCallback(
     (movieInfo) => {
       return savedMovies.some((item) => {
