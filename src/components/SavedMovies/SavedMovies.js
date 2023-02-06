@@ -16,7 +16,10 @@ function SavedMovies({ loggedIn, savedMovies, handleDeleteMovie }) {
   // ДЛЯ КОМПОНЕНТА Movies
   // фильтр фильмов
   const filteredMovices = useMemo(() => {
-    if (searchWordSavedMovies.length === 0) {
+    if (
+      searchWordSavedMovies.length === 0 &&
+      isShortFilmSavedMovies === false
+    ) {
       return savedMovies;
     }
     return filterMovies(
