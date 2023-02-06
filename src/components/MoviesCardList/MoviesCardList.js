@@ -6,9 +6,8 @@ function MoviesCardList({
   isSavedMovies,
   movies,
   searchWord,
-  handleSaveMovie,
-  savedMovies,
-  handleDeleteMovie,
+  handleSaveOrDeleteMovie,
+  checkIsSaved,
 }) {
   // количество видимых фильмов на странице
   const [numberOfVisibleMovies, setNumberOfVisibleMovies] = useState(null);
@@ -62,9 +61,8 @@ function MoviesCardList({
                 info={item}
                 key={item.id}
                 isSavedMovies={isSavedMovies}
-                handleSaveMovie={handleSaveMovie}
-                savedMovies={savedMovies}
-                handleDeleteMovie={handleDeleteMovie}
+                handleOnClick={handleSaveOrDeleteMovie}
+                checkIsSaved={checkIsSaved}
               />
             ))}
         {isSavedMovies &&

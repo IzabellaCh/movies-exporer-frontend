@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import "./Movies.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -22,6 +22,39 @@ function Movies({
   const [searchWord, setSearchWord] = useState("");
   const [preloaderIsVisible, setPreloaderIsVisible] = useState(false);
   const [isShortFilm, setIsShortFilm] = useState(false);
+
+  // БЛОК О КАРТОЧКЕ
+  // const [isSaved, setIsSaved] = useState(false);
+
+  const findMovieInfo = useCallback(
+    (movieInfo, isSaved) => {
+      if (isSaved) {
+        return savedMovies.find((item) => {
+          return item.nameRU === movieInfo.nameRU;
+        });
+      }
+    },
+    [savedMovies]
+  );
+
+  const handleSaveOrDeleteMovie = (event, isSaved, movieInfo, setIsSaved) => {
+    event.preventDefault();
+    if (!isSaved) {
+      handleSaveMovie(movieInfo, setIsSaved);
+    } else {
+      const deletedMovieInfo = findMovieInfo(movieInfo, isSaved);
+      handleDeleteMovie(deletedMovieInfo, setIsSaved);
+    }
+  };
+
+  const checkIsSaved = useCallback(
+    (movieInfo) => {
+      return savedMovies.some((item) => {
+        return item.nameRU === movieInfo.nameRU;
+      });
+    },
+    [savedMovies]
+  );
 
   // фильтр фильмов
   const filteredMovices = useMemo(() => {
@@ -111,9 +144,8 @@ function Movies({
           isSavedMovies={isSavedMovies}
           movies={filteredMovices}
           searchWord={searchWord}
-          handleSaveMovie={handleSaveMovie}
-          savedMovies={savedMovies}
-          handleDeleteMovie={handleDeleteMovie}
+          handleSaveOrDeleteMovie={handleSaveOrDeleteMovie}
+          checkIsSaved={checkIsSaved}
         />
       </main>
       <Footer />
