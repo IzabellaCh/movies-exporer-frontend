@@ -23,7 +23,7 @@ function Movies({
   const [preloaderIsVisible, setPreloaderIsVisible] = useState(false);
   const [isShortFilm, setIsShortFilm] = useState(false);
 
-  // БЛОК О КАРТОЧКЕ С ФИЛЬМОМ
+  // ДЛЯ КОМПОНЕНТА MoviesCard
   // поиск фильма в массиве с сохраненными фильмами, чтобы по id была возможность удалить
   const findMovieInfo = useCallback(
     (movieInfo, isSaved) => {
@@ -57,6 +57,7 @@ function Movies({
     [savedMovies]
   );
 
+  // ДЛЯ КОМПОНЕНТА Movies
   // фильтр фильмов
   const filteredMovices = useMemo(() => {
     return filterMovies(allMovies, searchWord, isShortFilm);
@@ -83,6 +84,7 @@ function Movies({
   };
   // localStorage.clear();
 
+  // ДЛЯ КОМПОНЕНТА FilterCheckbox
   // изменение состояния чекбокса
   const handleClickCheckbox = (event) => {
     if (event.target.checked) {
@@ -94,6 +96,7 @@ function Movies({
     }
   };
 
+  // ДЛЯ КОМПОНЕНТА SearchForm
   // подстановка текста в инпут из хранилища при перезагрузке
   const putWordInInput = (setValues) => {
     if (localStorage.getItem("searchWord") !== null) {
