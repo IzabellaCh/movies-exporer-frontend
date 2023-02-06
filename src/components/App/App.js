@@ -64,7 +64,7 @@ function App() {
   };
 
   const checkToken = useCallback(() => {
-    authorization
+    return authorization
       .checkToken()
       .then((res) => {
         handleLogin();
@@ -155,98 +155,100 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    checkToken();
-    setTokenIsChecked(true);
+    checkToken().finally(() => {
+      setTokenIsChecked(true);
+    });
   }, [checkToken]);
 
   if (!tokenIsChecked) {
     return null;
-  } else {
-    return (
-      <div className="page">
-        <CurrentUserContext.Provider value={currentUser}>
-          <Routes>
-            <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
-            <Route
-              path="/movies"
-              element={
-                loggedIn ? (
-                  <Movies
-                    allMovies={allMovies}
-                    getAllMovies={handleGetAllMovies}
-                    setAllMovies={setAllMovies}
-                    loggedIn={loggedIn}
-                    handleSaveMovie={handleSaveMovie}
-                    savedMovies={savedMovies}
-                    handleDeleteMovie={handleDeleteMovie}
-                  />
-                ) : (
-                  <Navigate to="/" replace />
-                )
-              }
-            />
-            <Route
-              path="/saved"
-              element={
-                loggedIn ? (
-                  <SavedMovies
-                    loggedIn={loggedIn}
-                    savedMovies={savedMovies}
-                    handleDeleteMovie={handleDeleteMovie}
-                  />
-                ) : (
-                  <Navigate to="/" replace />
-                )
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                loggedIn ? (
-                  <Profile
-                    loggedIn={loggedIn}
-                    handleSignOut={handleSignOut}
-                    onUpdateUser={handleUpdateUser}
-                  />
-                ) : (
-                  <Navigate to="/" replace />
-                )
-              }
-            />
-            <Route
-              path="/signin"
-              element={<Login handleLogin={handleLogin} />}
-            />
-            <Route
-              path="/signup"
-              element={
-                <Register
-                  openSuccess={handleOpenSuccess}
-                  openFail={handleOpenFail}
-                  handleLogin={handleLogin}
-                />
-              }
-            />
-            <Route path="*" element={<PageNotFound />}></Route>
-          </Routes>
-          <InfoTooltip
-            name="success"
-            title="Всё получилось!"
-            image={success}
-            isOpen={isSuccessOpen}
-            onClose={closeAllPopups}
-          />
-          <InfoTooltip
-            name="fail"
-            title="Что-то пошло не так! Попробуйте ещё раз."
-            image={fail}
-            isOpen={isFailOpen}
-            onClose={closeAllPopups}
-          />
-        </CurrentUserContext.Provider>
-      </div>
-    );
   }
+
+  // при попытке использовать ProtectedRouter react уведомляет,
+  // что внутри Routes нельзя использовать ничего, кроме Route,
+  // при попытке заменить Routes на Switch react пишет, что он не находится в react-router-dom,
+  // поэтому использовала защиту роутов без дополнительного компонента
+  return (
+    <div className="page">
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
+          <Route
+            path="/movies"
+            element={
+              loggedIn ? (
+                <Movies
+                  allMovies={allMovies}
+                  getAllMovies={handleGetAllMovies}
+                  setAllMovies={setAllMovies}
+                  loggedIn={loggedIn}
+                  handleSaveMovie={handleSaveMovie}
+                  savedMovies={savedMovies}
+                  handleDeleteMovie={handleDeleteMovie}
+                />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route
+            path="/saved"
+            element={
+              loggedIn ? (
+                <SavedMovies
+                  loggedIn={loggedIn}
+                  savedMovies={savedMovies}
+                  handleDeleteMovie={handleDeleteMovie}
+                />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              loggedIn ? (
+                <Profile
+                  loggedIn={loggedIn}
+                  handleSignOut={handleSignOut}
+                  onUpdateUser={handleUpdateUser}
+                />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+          <Route
+            path="/signup"
+            element={
+              <Register
+                openSuccess={handleOpenSuccess}
+                openFail={handleOpenFail}
+                handleLogin={handleLogin}
+              />
+            }
+          />
+          <Route path="*" element={<PageNotFound />}></Route>
+        </Routes>
+        <InfoTooltip
+          name="success"
+          title="Всё получилось!"
+          image={success}
+          isOpen={isSuccessOpen}
+          onClose={closeAllPopups}
+        />
+        <InfoTooltip
+          name="fail"
+          title="Что-то пошло не так! Попробуйте ещё раз."
+          image={fail}
+          isOpen={isFailOpen}
+          onClose={closeAllPopups}
+        />
+      </CurrentUserContext.Provider>
+    </div>
+  );
 }
 
 export default App;
