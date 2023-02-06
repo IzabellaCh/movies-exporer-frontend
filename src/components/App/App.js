@@ -192,7 +192,11 @@ function App() {
             path="/saved"
             element={
               loggedIn ? (
-                <SavedMovies loggedIn={loggedIn} savedMovies={savedMovies} />
+                <SavedMovies
+                  loggedIn={loggedIn}
+                  savedMovies={savedMovies}
+                  handleDeleteMovie={handleDeleteMovie}
+                />
               ) : (
                 <Navigate to="/signin" replace />
               )

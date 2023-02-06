@@ -6,7 +6,7 @@ function MoviesCardList({
   isSavedMovies,
   movies,
   searchWord,
-  handleSaveOrDeleteMovie,
+  handleOnClick,
   checkIsSaved,
 }) {
   // количество видимых фильмов на странице
@@ -61,7 +61,7 @@ function MoviesCardList({
                 info={item}
                 key={item.id}
                 isSavedMovies={isSavedMovies}
-                handleOnClick={handleSaveOrDeleteMovie}
+                handleOnClick={handleOnClick}
                 checkIsSaved={checkIsSaved}
               />
             ))}
@@ -69,8 +69,9 @@ function MoviesCardList({
           movies.map((item) => (
             <MoviesCard
               info={item}
-              key={item.id}
+              key={item._id}
               isSavedMovies={isSavedMovies}
+              handleOnClick={handleOnClick}
             />
           ))}
       </div>

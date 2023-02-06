@@ -37,7 +37,7 @@ function Movies({
   );
 
   // сохранение или удаления фильма по клику
-  const handleSaveOrDeleteMovie = (event, isSaved, movieInfo, setIsSaved) => {
+  const handleSaveOrDeleteMovie = (event, movieInfo, setIsSaved, isSaved) => {
     event.preventDefault();
     if (!isSaved) {
       handleSaveMovie(movieInfo, setIsSaved);
@@ -82,7 +82,6 @@ function Movies({
     setSearchWord(word);
     localStorage.setItem("searchWord", word);
   };
-  // localStorage.clear();
 
   // ДЛЯ КОМПОНЕНТА FilterCheckbox
   // изменение состояния чекбокса
@@ -148,7 +147,7 @@ function Movies({
           isSavedMovies={isSavedMovies}
           movies={filteredMovices}
           searchWord={searchWord}
-          handleSaveOrDeleteMovie={handleSaveOrDeleteMovie}
+          handleOnClick={handleSaveOrDeleteMovie}
           checkIsSaved={checkIsSaved}
         />
       </main>

@@ -7,12 +7,13 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Message from "../Message/Message";
 import { filterMovies } from "../../utils/filterMovies.js";
 
-function SavedMovies({ loggedIn, savedMovies }) {
+function SavedMovies({ loggedIn, savedMovies, handleDeleteMovie }) {
   const pageIsMain = false;
   const isSavedMovies = true;
   const [searchWordSavedMovies, setSearchWordSavedMovies] = useState("");
   const [isShortFilmSavedMovies, setIsShortFilmSavedMovies] = useState(false);
 
+  // ДЛЯ КОМПОНЕНТА Movies
   // фильтр фильмов
   const filteredMovices = useMemo(() => {
     return filterMovies(
@@ -38,6 +39,7 @@ function SavedMovies({ loggedIn, savedMovies }) {
     localStorage.setItem("searchWordSavedMovies", word);
   };
 
+  // ДЛЯ КОМПОНЕНТА FilterCheckbox
   // изменение состояния чекбокса
   const handleClickCheckbox = (event) => {
     if (event.target.checked) {
@@ -49,6 +51,7 @@ function SavedMovies({ loggedIn, savedMovies }) {
     }
   };
 
+  // ДЛЯ КОМПОНЕНТА SearchForm
   // подстановка текста в инпут из хранилища при перезагрузке
   const putWordInInput = (setValues) => {
     if (localStorage.getItem("searchWordSavedMovies") !== null) {
@@ -57,6 +60,12 @@ function SavedMovies({ loggedIn, savedMovies }) {
         movie: localStorage.getItem("searchWordSavedMovies"),
       }));
     }
+  };
+
+  // ДЛЯ КОМПОНЕНТА MoviesCard
+  const handleOnClick = (event, movieInfo, setIsSaved) => {
+    event.preventDefault();
+    handleDeleteMovie(movieInfo, setIsSaved);
   };
 
   return (
@@ -78,6 +87,7 @@ function SavedMovies({ loggedIn, savedMovies }) {
           isSavedMovies={isSavedMovies}
           movies={savedMovies}
           searchWord={searchWordSavedMovies}
+          handleOnClick={handleOnClick}
         />
       </main>
       <Footer />
