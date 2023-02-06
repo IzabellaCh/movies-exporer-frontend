@@ -19,7 +19,7 @@ import { mainApi } from "../../utils/MainApi.js";
 function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [pageIsNotFound, setPageIsNotFound] = useState(true);
+  const [pageIsNotFound, setPageIsNotFound] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isFailOpen, setIsFailOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -101,6 +101,7 @@ function App() {
       .signout()
       .then((data) => {
         handleComeOut();
+        localStorage.clear();
         navigate("/");
       })
       .catch((err) => {

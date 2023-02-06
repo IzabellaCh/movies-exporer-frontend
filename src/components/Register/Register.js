@@ -26,7 +26,6 @@ function Register({ openSuccess, openFail, handleLogin }) {
           openSuccess();
           authorization.login(email, password).then((data) => {
             handleLogin();
-            localStorage.clear();
             navigate("/movies");
           });
         }
