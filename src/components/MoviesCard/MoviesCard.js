@@ -1,15 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./MoviesCard.css";
 
-function MoviesCard({ isSavedMovies, info }) {
+function MoviesCard({
+  isSavedMovies,
+  info,
+  handleSaveMovie,
+  savedMovies,
+  handleDeleteMovie,
+}) {
   const [isSaved, setIsSaved] = useState(false);
   const [minutes, setMinutes] = useState("");
 
-  const saveMovie = () => {
-    setIsSaved(!isSaved);
+  const findMovieInfo = useMemo(() => {
+    if (isSaved) {
+      return savedMovies.find((item) => {
+        return item.nameRU === info.nameRU;
+      });
+    }
+  }, [isSaved, savedMovies, info]);
+
+  const saveOrDeleteMovie = (event) => {
+    event.preventDefault();
+    if (!isSaved) {
+      handleSaveMovie(info, setIsSaved);
+    } else {
+      console.log(findMovieInfo);
+      handleDeleteMovie(findMovieInfo, setIsSaved);
+    }
   };
 
-  const deleteMovie = () => {};
+  const deleteMovie = () => {
+    setIsSaved(false);
+  };
+
+  const checkIsSaved = useMemo(() => {
+    return savedMovies.some((item) => {
+      return item.nameRU === info.nameRU;
+    });
+  }, [savedMovies, info]);
 
   useEffect(() => {
     let n = Math.abs(info.duration) % 100;
@@ -23,6 +51,14 @@ function MoviesCard({ isSavedMovies, info }) {
       setMinutes(" минута");
     } else setMinutes(" минут");
   }, [info]);
+
+  useEffect(() => {
+    if (checkIsSaved) {
+      setIsSaved(true);
+    } else {
+      setIsSaved(false);
+    }
+  }, [checkIsSaved]);
 
   return (
     <a
@@ -46,7 +82,7 @@ function MoviesCard({ isSavedMovies, info }) {
       />
       {!isSavedMovies && (
         <button
-          onClick={saveMovie}
+          onClick={saveOrDeleteMovie}
           className={`movie-card__button button-opacity ${
             isSaved
               ? "movie-card__button_type_is-saved"

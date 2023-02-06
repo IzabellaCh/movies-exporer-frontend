@@ -19,9 +19,9 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  // запрос для создания массива карточек
-  getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
+  // запрос на получение сохраненных фильмов +
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
       credentials: "include",
       headers: this._headers,
     }).then(this._checkResponse);
@@ -42,46 +42,30 @@ class MainApi {
 
   // запрос для создания новой карточки
   saveMovie(movieInfo) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       credentials: "include",
       headers: this._headers,
       body: JSON.stringify({
-        name: movieInfo.name,
-        link: movieInfo.link,
+        nameRU: movieInfo.nameRU,
+        nameEN: movieInfo.nameEN,
+        movieId: movieInfo.id,
+        thumbnail: `https://api.nomoreparties.co/${movieInfo.image.formats.thumbnail.url}`,
+        trailerLink: movieInfo.trailerLink,
+        image: `https://api.nomoreparties.co/${movieInfo.image.url}`,
+        description: movieInfo.description,
+        year: movieInfo.year,
+        duration: movieInfo.duration,
+        director: movieInfo.director,
+        country: movieInfo.country,
       }),
     }).then(this._checkResponse);
   }
 
-  deleteCard(cardInfo) {
-    return fetch(`${this._baseUrl}/cards/${cardInfo}`, {
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: "DELETE",
       credentials: "include",
-    }).then(this._checkResponse);
-  }
-
-  changeLikeCardStatus(cardId, isLiked) {
-    if (isLiked) {
-      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-        method: "PUT",
-        credentials: "include",
-      }).then(this._checkResponse);
-    } else {
-      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-        method: "DELETE",
-        credentials: "include",
-      }).then(this._checkResponse);
-    }
-  }
-
-  changeAvatar(link) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
-      credentials: "include",
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: link,
-      }),
     }).then(this._checkResponse);
   }
 }

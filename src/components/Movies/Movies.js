@@ -8,7 +8,15 @@ import Preloader from "../Preloader/Preloader";
 import Message from "../Message/Message";
 import { filterMovies } from "../../utils/filterMovies.js";
 
-function Movies({ allMovies, getAllMovies, setAllMovies, loggedIn }) {
+function Movies({
+  allMovies,
+  getAllMovies,
+  setAllMovies,
+  loggedIn,
+  handleSaveMovie,
+  savedMovies,
+  handleDeleteMovie,
+}) {
   const pageIsMain = false;
   const isSavedMovies = false;
   const [searchWord, setSearchWord] = useState("");
@@ -81,7 +89,7 @@ function Movies({ allMovies, getAllMovies, setAllMovies, loggedIn }) {
     if (localStorage.getItem("allMovies") !== null) {
       setAllMovies(JSON.parse(localStorage.getItem("allMovies")));
     }
-  }, []);
+  }, [setAllMovies]);
 
   return (
     <>
@@ -103,6 +111,9 @@ function Movies({ allMovies, getAllMovies, setAllMovies, loggedIn }) {
           isSavedMovies={isSavedMovies}
           movies={filteredMovices}
           searchWord={searchWord}
+          handleSaveMovie={handleSaveMovie}
+          savedMovies={savedMovies}
+          handleDeleteMovie={handleDeleteMovie}
         />
       </main>
       <Footer />

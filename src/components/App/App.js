@@ -18,6 +18,7 @@ import { mainApi } from "../../utils/MainApi.js";
 
 function App() {
   const [allMovies, setAllMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorCode, setErrorCode] = useState("");
@@ -40,7 +41,7 @@ function App() {
           "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
         );
         setErrorCode(err.code);
-        console.log(err.message, err.code);
+        // console.log(err.message, err.code);
         // setIsError(true);
       })
       .finally(() => {
@@ -73,7 +74,6 @@ function App() {
     authorization
       .checkToken()
       .then((res) => {
-        console.log(res);
         handleLogin();
         navigate("/");
       })
@@ -111,15 +111,54 @@ function App() {
       });
   };
 
-  useEffect(() => {
+  const handleSaveMovie = (newMovieInfo, setIsSaved) => {
     mainApi
-      .getUserInfo()
-      .then((data) => {
-        setCurrenUser(data);
+      .saveMovie(newMovieInfo)
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .then(() => {
+        setIsSaved(true);
       })
       .catch((err) => {
-        alert(`Ошибка при загрузке информации профиля: ${err}`);
+        alert(`Ошибка при сохранении фильма: ${err}`);
       });
+  };
+
+  const handleDeleteMovie = (movie, setIsSaved) => {
+    mainApi
+      .deleteMovie(movie._id)
+      .then(() => {
+        setSavedMovies((state) => state.filter((el) => el._id !== movie._id));
+      })
+      .then(() => {
+        setIsSaved(false);
+      })
+      .catch((err) => {
+        alert(`Ошибка при удалении карточки: ${err}`);
+      });
+  };
+
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi
+        .getUserInfo()
+        .then((data) => {
+          setCurrenUser(data);
+        })
+        .catch((err) => {
+          alert(`Ошибка при загрузке информации профиля: ${err}`);
+        });
+
+      mainApi
+        .getSavedMovies()
+        .then((data) => {
+          setSavedMovies(data);
+        })
+        .catch((err) => {
+          alert(`Ошибка при загрузке массива сохраненных фильмов: ${err}`);
+        });
+    }
   }, [loggedIn]);
 
   useEffect(() => {
@@ -140,6 +179,9 @@ function App() {
                   getAllMovies={handleGetAllMovies}
                   setAllMovies={setAllMovies}
                   loggedIn={loggedIn}
+                  handleSaveMovie={handleSaveMovie}
+                  savedMovies={savedMovies}
+                  handleDeleteMovie={handleDeleteMovie}
                 />
               ) : (
                 <Navigate to="/signin" replace />
@@ -150,7 +192,7 @@ function App() {
             path="/saved"
             element={
               loggedIn ? (
-                <SavedMovies loggedIn={loggedIn} />
+                <SavedMovies loggedIn={loggedIn} savedMovies={savedMovies} />
               ) : (
                 <Navigate to="/signin" replace />
               )
