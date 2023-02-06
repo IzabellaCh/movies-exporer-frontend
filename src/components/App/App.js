@@ -8,7 +8,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import Error from "../Error/Error";
+import PageNotFound from "../PageNotFound/PageNotFound";
 import { getAllMovies } from "../../utils/MoviesApi.js";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import success from "../../images/success.svg";
@@ -19,17 +19,13 @@ import { mainApi } from "../../utils/MainApi.js";
 function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [pageIsNotFound, setPageIsNotFound] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isFailOpen, setIsFailOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrenUser] = useState({});
+  const [tokenIsChecked, setTokenIsChecked] = useState(false);
 
   const navigate = useNavigate();
-
-  const handleOpenNotFoundError = () => {
-    setPageIsNotFound(true);
-  };
 
   const handleOpenSuccess = () => {
     setIsSuccessOpen(true);
@@ -42,7 +38,6 @@ function App() {
   const closeAllPopups = () => {
     setIsSuccessOpen(false);
     setIsFailOpen(false);
-    setPageIsNotFound(false);
   };
 
   const handleLogin = () => {
@@ -161,89 +156,97 @@ function App() {
 
   useEffect(() => {
     checkToken();
+    setTokenIsChecked(true);
   }, [checkToken]);
 
-  return (
-    <div className="page">
-      <CurrentUserContext.Provider value={currentUser}>
-        <Routes>
-          <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
-          <Route
-            path="/movies"
-            element={
-              loggedIn ? (
-                <Movies
-                  allMovies={allMovies}
-                  getAllMovies={handleGetAllMovies}
-                  setAllMovies={setAllMovies}
-                  loggedIn={loggedIn}
-                  handleSaveMovie={handleSaveMovie}
-                  savedMovies={savedMovies}
-                  handleDeleteMovie={handleDeleteMovie}
+  if (!tokenIsChecked) {
+    return null;
+  } else {
+    return (
+      <div className="page">
+        <CurrentUserContext.Provider value={currentUser}>
+          <Routes>
+            <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
+            <Route
+              path="/movies"
+              element={
+                loggedIn ? (
+                  <Movies
+                    allMovies={allMovies}
+                    getAllMovies={handleGetAllMovies}
+                    setAllMovies={setAllMovies}
+                    loggedIn={loggedIn}
+                    handleSaveMovie={handleSaveMovie}
+                    savedMovies={savedMovies}
+                    handleDeleteMovie={handleDeleteMovie}
+                  />
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
+            <Route
+              path="/saved"
+              element={
+                loggedIn ? (
+                  <SavedMovies
+                    loggedIn={loggedIn}
+                    savedMovies={savedMovies}
+                    handleDeleteMovie={handleDeleteMovie}
+                  />
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                loggedIn ? (
+                  <Profile
+                    loggedIn={loggedIn}
+                    handleSignOut={handleSignOut}
+                    onUpdateUser={handleUpdateUser}
+                  />
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
+            <Route
+              path="/signin"
+              element={<Login handleLogin={handleLogin} />}
+            />
+            <Route
+              path="/signup"
+              element={
+                <Register
+                  openSuccess={handleOpenSuccess}
+                  openFail={handleOpenFail}
+                  handleLogin={handleLogin}
                 />
-              ) : (
-                <Navigate to="/" replace />
-              )
-            }
+              }
+            />
+            <Route path="*" element={<PageNotFound />}></Route>
+          </Routes>
+          <InfoTooltip
+            name="success"
+            title="Всё получилось!"
+            image={success}
+            isOpen={isSuccessOpen}
+            onClose={closeAllPopups}
           />
-          <Route
-            path="/saved"
-            element={
-              loggedIn ? (
-                <SavedMovies
-                  loggedIn={loggedIn}
-                  savedMovies={savedMovies}
-                  handleDeleteMovie={handleDeleteMovie}
-                />
-              ) : (
-                <Navigate to="/" replace />
-              )
-            }
+          <InfoTooltip
+            name="fail"
+            title="Что-то пошло не так! Попробуйте ещё раз."
+            image={fail}
+            isOpen={isFailOpen}
+            onClose={closeAllPopups}
           />
-          <Route
-            path="/profile"
-            element={
-              loggedIn ? (
-                <Profile
-                  loggedIn={loggedIn}
-                  handleSignOut={handleSignOut}
-                  onUpdateUser={handleUpdateUser}
-                />
-              ) : (
-                <Navigate to="/" replace />
-              )
-            }
-          />
-          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
-          <Route
-            path="/signup"
-            element={
-              <Register
-                openSuccess={handleOpenSuccess}
-                openFail={handleOpenFail}
-                handleLogin={handleLogin}
-              />
-            }
-          />
-        </Routes>
-        <Error pageIsNotFound={pageIsNotFound} handleOnClick={closeAllPopups} />
-        <InfoTooltip
-          name="success"
-          title="Всё получилось!"
-          image={success}
-          isOpen={isSuccessOpen}
-          onClose={closeAllPopups}
-        />
-        <InfoTooltip
-          name="fail"
-          title="Что-то пошло не так! Попробуйте ещё раз."
-          image={fail}
-          isOpen={isFailOpen}
-          onClose={closeAllPopups}
-        />
-      </CurrentUserContext.Provider>
-    </div>
-  );
+        </CurrentUserContext.Provider>
+      </div>
+    );
+  }
 }
 
 export default App;
