@@ -10,7 +10,7 @@ function Message({
   return (
     <section
       className={`message ${
-        preloaderIsVisible || isSavedMovies
+        preloaderIsVisible
           ? ""
           : filteredMovices.length === 0 && searchWord.length !== 0
           ? "message_visible"

@@ -127,6 +127,7 @@ function Movies({
     }
   }, [setAllMovies]);
 
+  // localStorage.clear();
   return (
     <>
       <Header pageIsMain={pageIsMain} loggedIn={loggedIn} />

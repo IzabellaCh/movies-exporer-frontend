@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "./SavedMovies.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -16,6 +16,9 @@ function SavedMovies({ loggedIn, savedMovies, handleDeleteMovie }) {
   // ДЛЯ КОМПОНЕНТА Movies
   // фильтр фильмов
   const filteredMovices = useMemo(() => {
+    if (searchWordSavedMovies.length === 0) {
+      return savedMovies;
+    }
     return filterMovies(
       savedMovies,
       searchWordSavedMovies,
@@ -23,6 +26,7 @@ function SavedMovies({ loggedIn, savedMovies, handleDeleteMovie }) {
     );
   }, [savedMovies, searchWordSavedMovies, isShortFilmSavedMovies]);
 
+  // localStorage.clear();
   // функция проверки на сосответсвие прошлому запросу
   // + получение слова из формы поиска
   const findMovies = (word, setErrors) => {
@@ -68,6 +72,23 @@ function SavedMovies({ loggedIn, savedMovies, handleDeleteMovie }) {
     handleDeleteMovie(movieInfo, setIsSaved);
   };
 
+  useEffect(() => {
+    // проверка, есть ли в хранилице данные для фильтра фильмов
+    // если есть - установка их в стейт при монтировании компонента (на случай перезагрузки страницы)
+    if (localStorage.getItem("searchWordSavedMovies") !== null) {
+      setSearchWordSavedMovies(localStorage.getItem("searchWordSavedMovies"));
+    }
+
+    if (localStorage.getItem("isShortFilmSavedMovies") !== null) {
+      if (localStorage.getItem("isShortFilmSavedMovies") === "true") {
+        setIsShortFilmSavedMovies(true);
+      } else {
+        setIsShortFilmSavedMovies(false);
+      }
+    }
+  }, []);
+
+  // localStorage.clear();
   return (
     <>
       <Header pageIsMain={pageIsMain} loggedIn={loggedIn} />
@@ -82,10 +103,11 @@ function SavedMovies({ loggedIn, savedMovies, handleDeleteMovie }) {
           filteredMovices={filteredMovices}
           searchWord={searchWordSavedMovies}
           isSavedMovies={isSavedMovies}
+          preloaderIsVisible={false}
         />
         <MoviesCardList
           isSavedMovies={isSavedMovies}
-          movies={savedMovies}
+          movies={filteredMovices}
           searchWord={searchWordSavedMovies}
           handleOnClick={handleOnClick}
         />
