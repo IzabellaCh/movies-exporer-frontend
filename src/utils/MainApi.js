@@ -41,14 +41,14 @@ class MainApi {
   }
 
   // запрос для создания новой карточки
-  createNewCard(newCardInfo) {
+  saveMovie(movieInfo) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       credentials: "include",
       headers: this._headers,
       body: JSON.stringify({
-        name: newCardInfo.name,
-        link: newCardInfo.link,
+        name: movieInfo.name,
+        link: movieInfo.link,
       }),
     }).then(this._checkResponse);
   }

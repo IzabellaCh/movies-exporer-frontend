@@ -25,7 +25,12 @@ function MoviesCard({ isSavedMovies, info }) {
   }, [info]);
 
   return (
-    <div className="movie-card">
+    <a
+      className="movie-card"
+      href={info.trailerLink}
+      target="_blank"
+      rel="noreferrer"
+    >
       <div className="movie-card__info">
         <p className="movie-card__name">{info.nameRU}</p>
         <p className="movie-card__duration">{`${info.duration} ${minutes}`}</p>
@@ -57,7 +62,7 @@ function MoviesCard({ isSavedMovies, info }) {
           className="movie-card__button movie-card__button_type_delete button-opacity"
         ></button>
       )}
-    </div>
+    </a>
   );
 }
 
