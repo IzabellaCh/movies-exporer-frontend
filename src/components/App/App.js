@@ -19,9 +19,7 @@ import { mainApi } from "../../utils/MainApi.js";
 function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [errorCode, setErrorCode] = useState("");
+  const [pageIsNotFound, setPageIsNotFound] = useState(true);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isFailOpen, setIsFailOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,24 +27,8 @@ function App() {
 
   const navigate = useNavigate();
 
-  const handleGetAllMovies = (handlePreloader) => {
-    handlePreloader(true);
-    getAllMovies()
-      .then((data) => {
-        setAllMovies(data);
-        localStorage.setItem("allMovies", JSON.stringify(data));
-      })
-      .catch((err) => {
-        setErrorMessage(
-          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
-        );
-        setErrorCode(err.code);
-        // console.log(err.message, err.code);
-        // setIsError(true);
-      })
-      .finally(() => {
-        handlePreloader(false);
-      });
+  const handleOpenNotFoundError = () => {
+    setPageIsNotFound(true);
   };
 
   const handleOpenSuccess = () => {
@@ -60,6 +42,7 @@ function App() {
   const closeAllPopups = () => {
     setIsSuccessOpen(false);
     setIsFailOpen(false);
+    setPageIsNotFound(false);
   };
 
   const handleLogin = () => {
@@ -70,17 +53,31 @@ function App() {
     setLoggedIn(false);
   };
 
+  const handleGetAllMovies = (handlePreloader) => {
+    handlePreloader(true);
+    getAllMovies()
+      .then((data) => {
+        setAllMovies(data);
+        localStorage.setItem("allMovies", JSON.stringify(data));
+      })
+      .catch((err) => {
+        alert(`Ошибка ${err.code}: ${err.message}`);
+      })
+      .finally(() => {
+        handlePreloader(false);
+      });
+  };
+
   const checkToken = useCallback(() => {
     authorization
       .checkToken()
       .then((res) => {
         handleLogin();
-        navigate("/");
       })
       .catch((err) => {
-        alert(`Ошибка при авторизации: ${err}`);
+        alert(`Ошибка ${err.code}: ${err.message}`);
       });
-  });
+  }, []);
 
   const handleUpdateUser = (name, email, changeButton) => {
     changeButton("Сохранение");
@@ -92,7 +89,7 @@ function App() {
       })
       .catch((err) => {
         handleOpenFail();
-        console.log(`Ошибка при обновлнии данных: ${err}`);
+        alert(`Ошибка ${err.code}: ${err.message}`);
       })
       .finally(() => {
         changeButton("Редактировать");
@@ -107,7 +104,7 @@ function App() {
         navigate("/");
       })
       .catch((err) => {
-        alert(`Ошибка при выходе из аккаунта: ${err}`);
+        alert(`Ошибка ${err.code}: ${err.message}`);
       });
   };
 
@@ -121,7 +118,7 @@ function App() {
         setIsSaved(true);
       })
       .catch((err) => {
-        alert(`Ошибка при сохранении фильма: ${err}`);
+        alert(`Ошибка ${err.code}: ${err.message}`);
       });
   };
 
@@ -135,7 +132,7 @@ function App() {
         setIsSaved(false);
       })
       .catch((err) => {
-        alert(`Ошибка при удалении карточки: ${err}`);
+        alert(`Ошибка ${err.code}: ${err.message}`);
       });
   };
 
@@ -147,7 +144,7 @@ function App() {
           setCurrenUser(data);
         })
         .catch((err) => {
-          alert(`Ошибка при загрузке информации профиля: ${err}`);
+          alert(`Ошибка ${err.code}: ${err.message}`);
         });
 
       mainApi
@@ -156,14 +153,14 @@ function App() {
           setSavedMovies(data);
         })
         .catch((err) => {
-          alert(`Ошибка при загрузке массива сохраненных фильмов: ${err}`);
+          alert(`Ошибка ${err.code}: ${err.message}`);
         });
     }
   }, [loggedIn]);
 
   useEffect(() => {
     checkToken();
-  }, []);
+  }, [checkToken]);
 
   return (
     <div className="page">
@@ -223,11 +220,12 @@ function App() {
               <Register
                 openSuccess={handleOpenSuccess}
                 openFail={handleOpenFail}
+                handleLogin={handleLogin}
               />
             }
           />
         </Routes>
-        <Error isError={isError} code={errorCode} massage={errorMessage} />
+        <Error pageIsNotFound={pageIsNotFound} handleOnClick={closeAllPopups} />
         <InfoTooltip
           name="success"
           title="Всё получилось!"

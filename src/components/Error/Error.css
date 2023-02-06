@@ -42,13 +42,15 @@
     line-height: 1.2;
 }
 
-.error__link {
+.error__button {
     margin: 0;
     padding: 0;
     text-decoration: none;
     font-size: 14px;
     line-height: 1.2;
     color: #2BE080;
+    background-color: transparent;
+    border: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -71,7 +73,7 @@
         font-size: 12px;
     }
 
-    .error__link {
+    .error__button {
         font-size: 12px;
     }
 }

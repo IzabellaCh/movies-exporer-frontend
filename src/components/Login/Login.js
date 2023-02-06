@@ -26,7 +26,7 @@ function Login({ handleLogin }) {
         navigate("/movies");
       })
       .catch((err) => {
-        console.log(`Ошибка при авторизации: ${err}`);
+        alert(`Ошибка ${err.code}: ${err.message}`);
       })
       .finally(() => {
         setButtonText("Войти");

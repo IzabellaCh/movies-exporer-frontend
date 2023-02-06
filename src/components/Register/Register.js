@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AuthenticationWithForm from "../AuthenticationWithForm/AuthenticationWithForm";
 import { authorization } from "../../utils/authorization";
 
-function Register({ openSuccess, openFail }) {
+function Register({ openSuccess, openFail, handleLogin }) {
   const navigate = useNavigate();
   const [buttonText, setButtonText] = useState("Зарегистрироваться");
 
@@ -22,15 +22,18 @@ function Register({ openSuccess, openFail }) {
     authorization
       .register(name, email, password)
       .then((res) => {
-        console.log(res);
         if (res) {
           openSuccess();
-          navigate("/signin");
+          authorization.login(email, password).then((data) => {
+            handleLogin();
+            localStorage.clear();
+            navigate("/movies");
+          });
         }
       })
       .catch((err) => {
         openFail();
-        console.log(`Ошибка при регистрации: ${err}`);
+        alert(`Ошибка ${err.code}: ${err.message}`);
       })
       .finally(() => {
         setButtonText("Зарегистрироваться");

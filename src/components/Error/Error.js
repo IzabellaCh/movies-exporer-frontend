@@ -1,23 +1,27 @@
 import React from "react";
 import "./Error.css";
-import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Error({ isError, code, massage }) {
-  //   const navigate = useNavigate();
+function Error({ pageIsNotFound, handleOnClick }) {
+  const navigate = useNavigate();
 
-  //   const goBack = () => {
-  //     navigate(-1);
-  //   };
+  const goBack = () => {
+    navigate(-1);
+  };
+
+  const onClick = () => {
+    handleOnClick();
+    goBack();
+  };
 
   return (
-    <div className={`error ${isError ? "error__visible" : ""}`}>
+    <div className={`error ${pageIsNotFound ? "error__visible" : ""}`}>
       <div className="error__container">
-        <p className="error__code">{code}</p>
-        <p className="error__message">{massage}</p>
-        <Link to="" className="error__link link-opacity">
+        <p className="error__code">404</p>
+        <p className="error__message">Страница не найдена</p>
+        <button onClick={onClick} className="error__button button-opacity">
           Назад
-        </Link>
+        </button>
       </div>
     </div>
   );
