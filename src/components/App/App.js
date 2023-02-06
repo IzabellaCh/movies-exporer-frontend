@@ -103,7 +103,7 @@ function App() {
     authorization
       .signout()
       .then((data) => {
-        console.log(data.message);
+        handleComeOut();
         navigate("/");
       })
       .catch((err) => {
@@ -184,7 +184,7 @@ function App() {
                   handleDeleteMovie={handleDeleteMovie}
                 />
               ) : (
-                <Navigate to="/signin" replace />
+                <Navigate to="/" replace />
               )
             }
           />
@@ -198,7 +198,7 @@ function App() {
                   handleDeleteMovie={handleDeleteMovie}
                 />
               ) : (
-                <Navigate to="/signin" replace />
+                <Navigate to="/" replace />
               )
             }
           />
@@ -212,7 +212,7 @@ function App() {
                   onUpdateUser={handleUpdateUser}
                 />
               ) : (
-                <Navigate to="/signin" replace />
+                <Navigate to="/" replace />
               )
             }
           />

@@ -23,7 +23,7 @@ function Login({ handleLogin }) {
       .login(email, password)
       .then((data) => {
         handleLogin();
-        navigate("/");
+        navigate("/movies");
       })
       .catch((err) => {
         console.log(`Ошибка при авторизации: ${err}`);
