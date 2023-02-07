@@ -149,6 +149,7 @@ function Movies({
           filteredMovices={filteredMovices}
           searchWord={searchWord}
           preloaderIsVisible={preloaderIsVisible}
+          isSavedMovies={isSavedMovies}
         />
         <MoviesCardList
           isSavedMovies={isSavedMovies}

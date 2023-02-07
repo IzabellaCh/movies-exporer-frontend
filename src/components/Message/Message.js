@@ -12,7 +12,8 @@ function Message({
       className={`message ${
         preloaderIsVisible
           ? ""
-          : filteredMovices.length === 0 && searchWord.length !== 0
+          : (filteredMovices.length === 0 && searchWord.length !== 0) ||
+            (filteredMovices.length === 0 && isSavedMovies)
           ? "message_visible"
           : ""
       } `}

@@ -53,8 +53,8 @@ class Authorization {
 }
 
 export const authorization = new Authorization({
-  // baseUrl: "http://localhost:3001",
-  baseUrl: "https://api.movie-project.nomoredomains.club",
+  baseUrl: "http://localhost:3001",
+  // baseUrl: "https://api.movie-project.nomoredomains.club",
   headers: {
     "Content-Type": "application/json",
   },

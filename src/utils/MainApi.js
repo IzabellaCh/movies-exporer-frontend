@@ -71,8 +71,8 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  // baseUrl: "http://localhost:3001",
-  baseUrl: "https://api.movie-project.nomoredomains.club",
+  baseUrl: "http://localhost:3001",
+  // baseUrl: "https://api.movie-project.nomoredomains.club",
   headers: {
     "Content-Type": "application/json",
   },
