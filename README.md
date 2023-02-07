@@ -7,3 +7,5 @@
 Ссылка на макет Figma: https://drive.google.com/drive/folders/1WqC4gk3dyVqh2hiuh8z5tigXlMlcpppK?usp=share_link
 
 Ссылка на pull request: https://github.com/IzabellaCh/movies-exporer-frontend/pull/2
+
+Ссылка на frontend: https://movie-project.nomoredomains.club/
