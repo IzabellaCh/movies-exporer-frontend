@@ -16,7 +16,7 @@ function Login({ handleLogin }) {
     path: "/signup",
   };
 
-  function handleSubmit(event, email, password) {
+  function handleSubmit(event, email, password, setValues) {
     event.preventDefault();
     setButtonText("Подождите...");
     authorization
@@ -26,6 +26,10 @@ function Login({ handleLogin }) {
         navigate("/movies");
       })
       .catch((err) => {
+        setValues(() => ({
+          email: email,
+          password: password,
+        }));
         alert(err.message);
       })
       .finally(() => {

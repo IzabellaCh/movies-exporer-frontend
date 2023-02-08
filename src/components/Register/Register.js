@@ -16,7 +16,7 @@ function Register({ openSuccess, openFail, handleLogin }) {
     path: "/signin",
   };
 
-  function handleSubmit(event, email, password, name) {
+  function handleSubmit(event, email, password, setValues, name) {
     event.preventDefault();
     setButtonText("Регистрация...");
     authorization
@@ -32,6 +32,11 @@ function Register({ openSuccess, openFail, handleLogin }) {
       })
       .catch((err) => {
         openFail();
+        setValues(() => ({
+          name: name,
+          email: email,
+          password: password,
+        }));
         alert(err.message);
       })
       .finally(() => {
