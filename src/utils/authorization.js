@@ -4,11 +4,11 @@ class Authorization {
     this._headers = data.headers;
   }
 
-  _checkResponse(res) {
+  async _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(await res.json());
   }
 
   register(name, email, password) {
@@ -53,8 +53,8 @@ class Authorization {
 }
 
 export const authorization = new Authorization({
-  // baseUrl: "http://localhost:3001",
-  baseUrl: "https://api.movie-project.nomoredomains.club",
+  baseUrl: "http://localhost:3001",
+  // baseUrl: "https://api.movie-project.nomornpmedomains.club",
   headers: {
     "Content-Type": "application/json",
   },

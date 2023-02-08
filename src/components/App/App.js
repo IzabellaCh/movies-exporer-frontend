@@ -56,7 +56,7 @@ function App() {
         localStorage.setItem("allMovies", JSON.stringify(data));
       })
       .catch((err) => {
-        alert(`Ошибка ${err.code}: ${err.message}`);
+        alert(err.message);
       })
       .finally(() => {
         handlePreloader(false);
@@ -70,7 +70,7 @@ function App() {
         handleLogin();
       })
       .catch((err) => {
-        alert(`Ошибка ${err.code}: ${err.message}`);
+        console.log(err.message);
       });
   }, []);
 
@@ -84,7 +84,7 @@ function App() {
       })
       .catch((err) => {
         handleOpenFail();
-        alert(`Ошибка ${err.code}: ${err.message}`);
+        alert(err.message);
       })
       .finally(() => {
         changeButton("Редактировать");
@@ -100,7 +100,7 @@ function App() {
         navigate("/");
       })
       .catch((err) => {
-        alert(`Ошибка ${err.code}: ${err.message}`);
+        alert(err.message);
       });
   };
 
@@ -114,7 +114,7 @@ function App() {
         setIsSaved(true);
       })
       .catch((err) => {
-        alert(`Ошибка ${err.code}: ${err.message}`);
+        alert(err.message);
       });
   };
 
@@ -128,7 +128,7 @@ function App() {
         setIsSaved(false);
       })
       .catch((err) => {
-        alert(`Ошибка ${err.code}: ${err.message}`);
+        alert(err.message);
       });
   };
 
@@ -140,7 +140,7 @@ function App() {
           setCurrenUser(data);
         })
         .catch((err) => {
-          alert(`Ошибка ${err.code}: ${err.message}`);
+          alert(err.message);
         });
 
       mainApi
@@ -149,7 +149,7 @@ function App() {
           setSavedMovies(data);
         })
         .catch((err) => {
-          alert(`Ошибка ${err.code}: ${err.message}`);
+          alert(err.message);
         });
     }
   }, [loggedIn]);

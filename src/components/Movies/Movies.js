@@ -59,10 +59,8 @@ function Movies({
 
   // ДЛЯ КОМПОНЕНТА Movies
   // фильтр фильмов
+
   const filteredMovices = useMemo(() => {
-    // на случай, когда пользователь вышел, снова зашел,
-    // allMovies уже загружены, хранилище очищено,
-    // в searchWord пустая строка - будут показаны все фильмы из allMovies
     if (searchWord.length === 0) {
       return [];
     }

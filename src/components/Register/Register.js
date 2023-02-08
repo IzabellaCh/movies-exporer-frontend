@@ -32,7 +32,7 @@ function Register({ openSuccess, openFail, handleLogin }) {
       })
       .catch((err) => {
         openFail();
-        alert(`Ошибка ${err.code}: ${err.message}`);
+        alert(err.message);
       })
       .finally(() => {
         setButtonText("Зарегистрироваться");

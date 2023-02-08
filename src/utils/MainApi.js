@@ -4,11 +4,11 @@ class MainApi {
     this._headers = data.headers;
   }
 
-  _checkResponse(res) {
+  async _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(await res.json());
   }
 
   // запрос для получения информации о пользователе +
@@ -71,8 +71,8 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  // baseUrl: "http://localhost:3001",
-  baseUrl: "https://api.movie-project.nomoredomains.club",
+  baseUrl: "http://localhost:3001",
+  // baseUrl: "https://api.movie-project.nomoredomains.club",
   headers: {
     "Content-Type": "application/json",
   },
