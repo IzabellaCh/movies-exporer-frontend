@@ -24,7 +24,7 @@
     color: #000000;
 }
 
-.navigation__link_type_unlogged {
+.navigation__link_type_main {
     color: #ffffff;
 }
 
@@ -119,7 +119,7 @@
     position: absolute;
     top: 25px;
     right: 25px;
-    background-image: url('../../images/close.svg');
+    background-image: url('../../images/close-black.svg');
     background-position: center;
     background-repeat: no-repeat;
     width: 22px;

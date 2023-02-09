@@ -4,17 +4,23 @@ import loupe from "../../images/loupe.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useRef } from "react";
 
-function SearchForm() {
+function SearchForm({
+  findNewMovies,
+  handlePutWord,
+  handleClickCheckbox,
+  isShortFilm,
+}) {
   const inputMovie = useRef();
   const [values, setValues] = useState({ movie: "" });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // фокус при нажатии на лупу
   const focusInput = () => {
     inputMovie.current.focus();
   };
 
+  // данные формы и валидация
   const onChange = (event) => {
     const { name, value, validationMessage } = event.target;
 
@@ -35,15 +41,22 @@ function SearchForm() {
     }
   };
 
-  useEffect(() => {
-    if (isSubmitted) {
-      setValues(() => ({
-        movie: "",
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (values.movie.length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        movie: "Нужно ввести ключевое слово",
       }));
-      setIsValid(false);
+      return;
     }
-    return setIsSubmitted(false);
-  }, [isSubmitted]);
+    // вызов запроса фильмов + прокидывание слова для фильтра фильмов в компонент выше
+    findNewMovies(values.movie, setErrors);
+  };
+
+  useEffect(() => {
+    handlePutWord(setValues);
+  }, []);
 
   return (
     <section className="search-form" aria-label="Строка поиска">
@@ -54,29 +67,49 @@ function SearchForm() {
           src={loupe}
           alt="Лупа."
         />
-        <form className="search-form__form">
-          <input
-            ref={inputMovie}
-            type="text"
-            name="movie"
-            value={values.movie}
-            onChange={onChange}
-            className="search-form__input"
-            placeholder="Фильм"
-            minLength="1"
-            maxLength="50"
-            required
-          ></input>
+        <form className="search-form__form" onSubmit={handleSubmit} noValidate>
+          <label className="search-form__input-container">
+            <input
+              ref={inputMovie}
+              type="text"
+              name="movie"
+              value={values.movie}
+              onChange={onChange}
+              className={`search-form__input ${
+                errors.movie?.length > 1 ? "search-form__input_type_error" : ""
+              }`}
+              placeholder="Фильм"
+              minLength="1"
+              maxLength="50"
+              // required - пока убрала,
+              // мне показалось так приятнее,
+              // раз по ТЗ необходимо сообщение на сабмит пустой формы
+              // иначе постоянно будет присуствовать сообщение об ошибке,
+              // если ползователь сам удалил написанное и оставил форму пустой
+            ></input>
+            <span
+              className={`search-form__input-error ${
+                errors.movie?.length > 1
+                  ? "search-form__input-error_active"
+                  : ""
+              }`}
+            >
+              {errors.movie}
+            </span>
+          </label>
           <button
             type="submit"
-            disabled={!isValid}
+            // disabled={!isValid}
             className={`search-form__button-search button-opacity ${
               isValid ? "" : "search-form__button-search_disabled"
             }`}
           ></button>
         </form>
         <div className="search-form__checkbox">
-          <FilterCheckbox />
+          <FilterCheckbox
+            onChange={handleClickCheckbox}
+            checked={isShortFilm}
+          />
         </div>
       </div>
       <div className="search-form__line"></div>

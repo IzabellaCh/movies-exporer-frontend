@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function AuthenticationWithForm({ info }) {
+function AuthenticationWithForm({ info, buttonText, handleSubmit }) {
   const [values, setValues] = useState({ name: "", email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -15,8 +15,8 @@ function AuthenticationWithForm({ info }) {
   const toMain = () => {
     navigate("/");
   };
-
-  function onChange(event) {
+  // данные формы и валидация
+  const onChange = (event) => {
     const { name, value, validationMessage } = event.target;
 
     setValues((prev) => ({
@@ -34,16 +34,17 @@ function AuthenticationWithForm({ info }) {
     } else {
       setIsValid(false);
     }
-  }
+  };
 
-  function onSubmit(event) {
-    event.preventDefault();
+  const onSubmit = (event) => {
+    handleSubmit(event, values.email, values.password, setValues, values.name);
     setIsSubmitted(true);
-  }
+  };
 
   useEffect(() => {
     if (isSubmitted) {
       setValues(() => ({
+        name: "",
         email: "",
         password: "",
       }));
@@ -151,7 +152,7 @@ function AuthenticationWithForm({ info }) {
               info.itIsRegister ? "" : "authentication__save-button_type_login"
             } ${isValid ? "" : "authentication__save-button_type_disabled"}`}
           >
-            {info.saveButton}
+            {buttonText}
           </button>
         </form>
         <p className="authentication__question">

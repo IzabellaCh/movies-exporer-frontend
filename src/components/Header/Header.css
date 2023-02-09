@@ -7,13 +7,14 @@
     align-items: center;
     box-sizing: border-box;
     position: relative;
-}
-
-.header_type_logged {
     background-color: #ffffff;
 }
 
-.header_type_unlogged {
+/* .header_type_logged {
+    background-color: #ffffff;
+} */
+
+.header_type_main {
     background-color: #5C5C5C;
 }
 
@@ -52,6 +53,10 @@
     height: 44px;
     background-color: transparent;
     border: none;
+}
+
+.header__button-menu_main {
+    background-image: url('../../images/menu-white.svg');
 }
 
 @media screen and (max-width: 900px) {

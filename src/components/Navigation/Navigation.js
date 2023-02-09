@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom";
 
-function Navigation({ pageIsMain, menuIsOpen, closeMenu }) {
+function Navigation({ loggedIn, pageIsMain, menuIsOpen, closeMenu }) {
   const navigate = useNavigate();
 
   const toProfile = () => {
@@ -13,19 +13,19 @@ function Navigation({ pageIsMain, menuIsOpen, closeMenu }) {
   return (
     <div
       className={`navigation ${
-        !pageIsMain ? "navigation_type_logged" : "navigation_type_unlogged"
+        loggedIn ? "navigation_type_logged" : "navigation_type_unlogged"
       }`}
     >
-      {!pageIsMain && (
+      {loggedIn && (
         <>
           <div className="navigation__inserted-menu">
             <nav className="navigation__links navigation__links_type_row">
               <NavLink
                 to="/movies"
                 className={({ isActive }) =>
-                  `${
-                    isActive ? "navigation__link_type_active" : ""
-                  } navigation__link link-opacity`
+                  `navigation__link link-opacity
+                  ${isActive ? "navigation__link_type_active" : ""} 
+                  ${pageIsMain ? "navigation__link_type_main" : ""}`
                 }
               >
                 Фильмы
@@ -33,9 +33,9 @@ function Navigation({ pageIsMain, menuIsOpen, closeMenu }) {
               <NavLink
                 to="/saved"
                 className={({ isActive }) =>
-                  `${
-                    isActive ? "navigation__link_type_active" : ""
-                  } navigation__link link-opacity`
+                  `navigation__link link-opacity
+                  ${isActive ? "navigation__link_type_active" : ""} 
+                  ${pageIsMain ? "navigation__link_type_main" : ""}`
                 }
               >
                 Сохранённые&nbsp;фильмы
@@ -103,11 +103,11 @@ function Navigation({ pageIsMain, menuIsOpen, closeMenu }) {
           </div>
         </>
       )}
-      {pageIsMain && (
+      {!loggedIn && (
         <nav>
           <Link
             to="/signup"
-            className="navigation__link navigation__link_type_unlogged link-opacity"
+            className="navigation__link navigation__link_type_main link-opacity"
           >
             Регистрация
           </Link>
